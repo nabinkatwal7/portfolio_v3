@@ -4,7 +4,7 @@ export type Description = {
     description:string
 }
 export const Description:Description = {
-    name:"John Doe",
+    name:"Nabin Katwal",
     title:"Software Engineer",
     description:"Web Developer by day, data magician by night. I translate complex ideas into stunning," +
         " user-friendly web applications using Next.js, React, and Tailwind. When not building interfaces, I'm" +

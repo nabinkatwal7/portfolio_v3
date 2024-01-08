@@ -103,4 +103,75 @@ export const VersionControlData = [
         name: "GitHub",
         image: "https://qph.cf2.quoracdn.net/main-qimg-729a22aba98d1235fdce4883accaf81e",
     },
+    {
+        id:"3",
+        name: "Azure Repos",
+        image: "https://miro.medium.com/v2/0*quoqBDTVl4ypSKNp",
+    }
+]
+
+export const DataAnalysisData = [
+    {
+        id:"1",
+        name: "Python",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+    },
+    {
+        id:"2",
+        name: "Matplotlib",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Created_with_Matplotlib-logo.svg/2048px-Created_with_Matplotlib-logo.svg.png",
+    },
+    {
+        id:"3",
+        name: "sklearn",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/2560px-Scikit_learn_logo_small.svg.png",
+    },
+    {
+        id:"4",
+        name:"NumPy",
+        image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/1280px-NumPy_logo_2020.svg.png"
+    },
+    {
+        id:"5",
+        name:"Pandas",
+        image:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/2560px-Pandas_logo.svg.png"
+    },
+    {
+        id:"6",
+        name:"Jupyter",
+        image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/883px-Jupyter_logo.svg.png"
+    },
+    {
+        id:"7",
+        name:"PyTorch",
+        image:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/PyTorch_logo_black.svg/2560px-PyTorch_logo_black.svg.png"
+    },
+    {
+        id:"8",
+        name:"Tensorflow",
+        image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Tensorflow_logo.svg/1915px-Tensorflow_logo.svg.png"
+    }
+]
+
+export const ProgrammingData = [
+    {
+        id:"1",
+        name: "Python",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+    },
+    {
+        id:"2",
+        name: "Rust",
+        image: "https://rust-lang.org/logos/rust-logo-512x512.png",
+    },
+    {
+        id:"3",
+        name: "SQL",
+        image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png",
+    },
+    {
+        id:"4",
+        name:"PostgresSQL",
+        image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png"
+    },
 ]

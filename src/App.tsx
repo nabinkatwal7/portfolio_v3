@@ -9,7 +9,7 @@ function App() {
     <div className="pb-10">
       <div className="relative min-h-screen">
         <Home />
-        <img className="absolute bottom-0 w-screen" src={Sunset} alt="sunset" />
+        <img className="absolute invisible lg:visible bottom-0 w-screen" src={Sunset} alt="sunset" />
       </div>
       <Work />
       <Footer />

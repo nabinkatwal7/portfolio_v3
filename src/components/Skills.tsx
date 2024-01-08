@@ -78,10 +78,10 @@ const Skills = () => {
         ))}
       </div>
       <p className="text-2xl font-bold font-playfair">Work</p>
-      <div className="group flex flex-wrap gap-10 lg:items-center justify-center">
+      <div className="group flex flex-wrap gap-10 lg:items-center justify-start">
         {ProjectData.map((item) => (
           <div
-            className="flex flex-col w-[35%] gap-4 justify-center transition-all hover:scale-110 hover:-rotate-2"
+            className="flex flex-col lg:w-[45%] gap-4 justify-center transition-all hover:scale-110 hover:-rotate-2"
             key={item.id}
           >
             <p className="text-2xl font-bold font-playfair" >{item.title}</p>

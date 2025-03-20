@@ -3,7 +3,7 @@ import Hero from "@/components/home/Hero";
 
 export default function Home() {
   return (
-    <div className={"flex flex-col gap-12"}>
+    <div className={"flex flex-col gap-12 relative"}>
       <Hero />
       <CTA />
     </div>

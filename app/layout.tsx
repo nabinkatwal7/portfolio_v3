@@ -1,3 +1,4 @@
+import Overlay from "@/components/common/animation/Overlay";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 import type { Metadata } from "next";
@@ -17,8 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased font-body text-[#FAF5F6] bg-[#252525] background-gradient`}
+        className={`antialiased relative font-body text-[#FAF5F6] bg-[#252525] background-gradient`}
       >
+        <Overlay />
         <Header />
         <div className={""}>{children}</div>
         <Footer />

@@ -1,1 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  --font-Logo: "Great Vibes";
+  --font-body: "Alata";
+}
+
+.background-gradient {
+  background-color: #003366;
+  background-image: linear-gradient(315deg, #003366 0%, #242124 74%);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

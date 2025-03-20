@@ -18,9 +18,9 @@ function Hero() {
   return (
     <div className="flex flex-col-reverse max-sm:w-full max-w-[1350px] lg:flex-row gap-8 justify-center items-center common-layout">
       <motion.div
-        initial={{ x: -800 }}
+        initial={{ x: -500 }}
         animate={{ x: 0 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
+        transition={{ duration: 5, ease: "easeInOut" }}
         exit={{ x: -800 }}
         whileInView={{ x: 0 }}
         className="flex flex-col gap-2 items-center w-full justify-center"
@@ -36,9 +36,9 @@ function Hero() {
         </p>
       </motion.div>
       <motion.div
-        initial={{ x: 800 }}
+        initial={{ x: 500 }}
         animate={{ x: 0 }}
-        transition={{ duration: 2, ease: "easeInOut" }}
+        transition={{ duration: 5, ease: "easeInOut" }}
         exit={{ x: 800 }}
         whileInView={{ x: 0 }}
         className="lg:flex justify-center w-full hidden"

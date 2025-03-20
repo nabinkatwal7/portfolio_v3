@@ -49,7 +49,7 @@ const navigation = {
 const Footer = () => {
   return (
     <CommonWrapper>
-      <footer>
+      <footer className="pb-6">
         <div className=" w-full flex flex-col items-center justify-center content-center overflow-hidden common-layout">
           <div className="flex flex-col items-center justify-center p-6">
             <Image

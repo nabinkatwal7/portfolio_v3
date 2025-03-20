@@ -20,13 +20,7 @@ export default function RootLayout({
         className={`antialiased font-body text-[#FAF5F6] bg-[#252525] background-gradient`}
       >
         <Header />
-        <div
-          className={
-            "max-w-[1300px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 "
-          }
-        >
-          {children}
-        </div>
+        <div className={""}>{children}</div>
         <Footer />
       </body>
     </html>

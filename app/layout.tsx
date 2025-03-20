@@ -1,6 +1,8 @@
+import Footer from "@/components/common/Footer";
+import Header from "@/components/common/Header";
 import type { Metadata } from "next";
-import "./globals.css";
 import React from "react";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nabin Katwal",
@@ -15,9 +17,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
+        className={`antialiased font-body text-[#FAF5F6] bg-[#252525] background-gradient`}
       >
-        {children}
+        <Header />
+        <div
+          className={
+            "max-w-[1300px] mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 "
+          }
+        >
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );

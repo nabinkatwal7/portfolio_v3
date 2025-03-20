@@ -1,6 +1,7 @@
 "use client";
 
 import { Dialog, DialogPanel } from "@headlessui/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,18 +12,24 @@ const navigation = [
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
+  { name: "Watchlog", href: "/watchlogs" },
 ];
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  console.log(pathname);
   return (
-    <header>
+    <motion.header
+      initial={{ y: -200 }}
+      animate={{ y: 0 }}
+      exit={{ y: -200 }}
+      whileInView={{ y: 0 }}
+      transition={{ duration: 1, ease: "circInOut" }}
+    >
       <nav
         aria-label="Global"
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        className="mx-auto flex items-center justify-between p-6 lg:px-8"
       >
         <Link href="/" className={`-m-1.5 p-1.5`}>
           <Image src="/images/logo.png" alt="logo" width={200} height={150} />
@@ -99,7 +106,7 @@ const Header = () => {
           </div>
         </DialogPanel>
       </Dialog>
-    </header>
+    </motion.header>
   );
 };
 

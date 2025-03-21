@@ -23,7 +23,7 @@ const TechComponent = ({ name, image }: { name: string; image: string }) => {
     <motion.div
       key={name}
       className="bg-white/5 p-8 sm:p-10 rounded-xl shadow-xl relative flex items-center justify-center"
-      variants={itemVariants}
+      // variants={itemVariants}
       whileHover={{
         scale: 1.1,
         boxShadow: "0px 15px 40px rgba(255, 255, 255, 0.15)",
@@ -32,7 +32,6 @@ const TechComponent = ({ name, image }: { name: string; image: string }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Conditional Rendering */}
       {isHovered ? (
         <span className="text-white text-xl font-semibold">{name}</span>
       ) : (
@@ -44,9 +43,6 @@ const TechComponent = ({ name, image }: { name: string; image: string }) => {
           className="max-h-12 w-full object-contain"
         />
       )}
-
-      {/* Water Reflection Effect */}
-      <div className="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-3/4 h-10 bg-white/10 blur-xl opacity-50 rounded-full"></div>
     </motion.div>
   );
 };

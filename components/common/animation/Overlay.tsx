@@ -1,10 +1,26 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Overlay = () => {
+  const [isAnimating, setIsAnimating] = useState(true);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsAnimating(false), 4000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (pathname !== "/") return null;
+
   return (
-    <div className="absolute w-screen h-screen top-0 left-0 z-[999] flex overflow-hidden items-center justify-center">
+    <div
+      className={`absolute w-screen h-screen top-0 left-0 flex overflow-hidden items-center justify-center transition-all duration-500 ${
+        isAnimating ? "z-[999]" : "z-[-1]"
+      }`}
+    >
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}

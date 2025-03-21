@@ -1,15 +1,21 @@
 "use client";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import React from "react";
 
-const CommonWrapper = ({ children }: { children: React.ReactNode }) => {
+const CommonWrapper = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
       transition={{ duration: 2, ease: "easeInOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className={className}
     >
       {children}
     </motion.div>

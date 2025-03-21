@@ -2,20 +2,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.85 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: "spring", stiffness: 120 },
-  },
-  floating: {
-    y: [0, -10, 0, 10, 0],
-    transition: { repeat: Infinity, duration: 5, ease: "easeInOut" },
-  },
-};
-
 const TechComponent = ({ name, image }: { name: string; image: string }) => {
   const [isHovered, setIsHovered] = useState(false);
 

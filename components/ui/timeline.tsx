@@ -36,7 +36,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         <h2 className="text-lg md:text-4xl mb-4 ">🚀 Buckle Up, Folks! 🚀</h2>
         <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base">
           Since 2023, I&apos;ve been stirring the pot at
-          <b>AITC International</b>
+          <b> AITC International</b>
           —coding, innovating, and occasionally convincing my laptop <i>not </i>
           to explode. 💥 Here&apos;s the behind-the-scenes drama of my journey!
           🎬

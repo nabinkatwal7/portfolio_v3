@@ -1,4 +1,5 @@
 import { Post } from "@/components/blog/Post";
+import CommonWrapper from "@/components/common/animation/CommonWrapper";
 import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
@@ -18,8 +19,8 @@ export default async function Page({
   }
 
   return (
-    <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
+    <CommonWrapper className=" grid grid-cols-1 gap-6 common-layout max-w-[1350px]">
       <Post {...post} />
-    </main>
+    </CommonWrapper>
   );
 }

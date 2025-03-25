@@ -10,8 +10,10 @@ const Page = async () => {
 
   return (
     <CommonWrapper className="common-layout max-w-[1350px]">
-      <h1 className="text-5xl font-extrabold text-center mb-10">Blog</h1>
-      <div className="flex flex-wrap justify-center gap-8 py-12 mx-auto">
+      <h2 className="text-4xl font-semibold tracking-tight text-pretty  sm:text-5xl">
+        Blog
+      </h2>
+      <div className="flex flex-wrap justify-start gap-8 py-12 mx-auto">
         {posts.map((post: any) => (
           <PostCard key={post._id} {...post} />
         ))}

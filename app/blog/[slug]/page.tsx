@@ -19,7 +19,7 @@ export default async function Page({
   }
 
   return (
-    <CommonWrapper className=" grid grid-cols-1  gap-6 common-layout max-w-[1350px]">
+    <CommonWrapper className="grid grid-cols-1 gap-6 common-layout w-full">
       <Post {...post} />
     </CommonWrapper>
   );

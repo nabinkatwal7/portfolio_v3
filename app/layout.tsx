@@ -1,6 +1,7 @@
 import Overlay from "@/components/common/animation/Overlay";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
+import { SanityLive } from "@/sanity/lib/live";
 import { Analytics } from "@vercel/analytics/react";
 
 import type { Metadata } from "next";
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Header />
         <div className={""}>{children}</div>
         <Footer />
+        <SanityLive />
       </body>
     </html>
   );

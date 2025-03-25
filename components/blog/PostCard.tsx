@@ -10,30 +10,28 @@ export function PostCard(props: any) {
   const { title, author, mainImage, publishedAt, categories } = props;
 
   return (
-    <Link className="group" href={`/blog/${props.slug!.current}`}>
-      <article className="flex flex-col-reverse gap-4 md:grid md:grid-cols-12 md:gap-0">
-        <div className="md:col-span-2 md:pt-1">
+    <Link className="group block" href={`/blog/${props.slug!.current}`}>
+      <article className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105">
+        {mainImage && (
+          <div className="w-full h-48 overflow-hidden">
+            <Image
+              src={urlFor(mainImage).width(600).height(300).url()}
+              width={600}
+              height={300}
+              alt={mainImage.alt || title || ""}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div className="p-6 space-y-4">
           <Categories categories={categories} />
-        </div>
-        <div className="md:col-span-5 md:w-full">
-          <h2 className="text-2xl text-pretty font-semibold group-hover:text-white transition-colors relative">
-            <span className="relative z-[1]">{title}</span>
-            <span className="bg-stone-600  z-0 absolute inset-0 rounded-lg opacity-0 transition-all group-hover:opacity-100 group-hover:scale-y-110 group-hover:scale-x-105 scale-75" />
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
+            {title}
           </h2>
-          <div className="flex items-center mt-2 md:mt-6 gap-x-6">
+          <div className="flex justify-between items-center text-gray-500 text-sm">
             <Author author={author} />
             <PublishedAt publishedAt={publishedAt} />
           </div>
-        </div>
-        <div className="md:col-start-9 md:col-span-4 rounded-lg overflow-hidden flex">
-          {mainImage ? (
-            <Image
-              src={urlFor(mainImage).width(400).height(200).url()}
-              width={400}
-              height={200}
-              alt={mainImage.alt || title || ""}
-            />
-          ) : null}
         </div>
       </article>
     </Link>

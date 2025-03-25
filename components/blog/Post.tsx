@@ -12,31 +12,33 @@ export function Post(props: NonNullable<any>) {
   const { title, author, mainImage, body, publishedAt, categories } = props;
 
   return (
-    <article className="grid lg:grid-cols-12 gap-y-12">
-      <header className="lg:col-span-12 flex flex-col gap-4 items-start">
-        <div className="flex gap-4 items-center">
-          <Categories categories={categories} />
-          <PublishedAt publishedAt={publishedAt} />
-        </div>
-        <Title>{title}</Title>
-        <Author author={author} />
-      </header>
-      {mainImage ? (
-        <figure className="lg:col-span-4 flex flex-col gap-2 items-start">
+    <article className="mx-auto px-4 md:px-6 lg:px-8 space-y-8">
+      {mainImage && (
+        <figure className="w-full">
           <Image
-            src={urlFor(mainImage).width(400).height(400).url()}
-            width={400}
+            src={urlFor(mainImage).width(800).height(400).url()}
+            width={800}
             height={400}
-            alt=""
-            className="rounded-lg"
+            alt={title}
+            className="w-full h-auto rounded-lg shadow-md"
           />
         </figure>
-      ) : null}
-      {body ? (
-        <div className="lg:col-span-7 lg:col-start-6 prose lg:prose-lg">
+      )}
+
+      <header className="text-center space-y-4">
+        <Categories categories={categories} />
+        <Title>{title}</Title>
+        <div className="flex justify-center gap-4 text-gray-500 text-sm">
+          <PublishedAt publishedAt={publishedAt} />
+          <Author author={author} />
+        </div>
+      </header>
+
+      {body && (
+        <div className="prose lg:prose-lg prose-invert mx-auto">
           <PortableText value={body} components={components} />
         </div>
-      ) : null}
+      )}
     </article>
   );
 }

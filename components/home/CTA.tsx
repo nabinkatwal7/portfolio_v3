@@ -17,11 +17,14 @@ const CTA = () => {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
               href="mailto:mediocampistaa@gmail.com"
-              className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold shadow-xs hover:bg-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary text-white"
             >
               Contact me
             </Link>
-            <Link href="/about" className="text-sm/6 font-semibold text-white">
+            <Link
+              href="/about"
+              className="text-sm/6 font-semibold text-primary"
+            >
               Learn more <span aria-hidden="true">→</span>
             </Link>
           </div>

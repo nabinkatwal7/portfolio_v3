@@ -51,7 +51,7 @@ const Header = () => {
               href={item.href}
               className={`text-base font-semibold transition-colors duration-300 hover:text-gray-300  ${
                 pathname === item.href &&
-                "text-[#1B0AFD] border-b-2 border-[#1B0AFD]"
+                "text-primary border-b-2 border-primary"
               }`}
             >
               {item.name}
@@ -95,7 +95,7 @@ const Header = () => {
                     key={item.name}
                     href={item.href}
                     className={`text-base font-semibold leading-0 ${
-                      pathname === item.href && "text-[#1B0AFD]"
+                      pathname === item.href && "text-primary"
                     }`}
                   >
                     {item.name}

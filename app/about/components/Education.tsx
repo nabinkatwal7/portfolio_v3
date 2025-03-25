@@ -25,7 +25,7 @@ const Education = () => {
     <CommonWrapper className="common-layout max-w-[1350px]">
       <div className="mx-auto  px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty  sm:text-5xl lg:text-balance">
+          <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty sm:text-5xl lg:text-balance">
             Educational Summary
           </p>
         </div>
@@ -42,7 +42,7 @@ const Education = () => {
                     <Link
                       target="_blank"
                       href={feature.href}
-                      className="text-sm/6 font-semibold text-indigo-400"
+                      className="text-sm/6 font-semibold text-primary"
                     >
                       Visit <span aria-hidden="true">→</span>
                     </Link>

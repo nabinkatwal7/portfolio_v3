@@ -1,5 +1,11 @@
+import Hero from "@/app/watchlogs/components/Hero";
+
 const Page = () => {
-  return <div>Watchlog</div>;
+  return (
+    <div>
+      <Hero />
+    </div>
+  );
 };
 
 export default Page;

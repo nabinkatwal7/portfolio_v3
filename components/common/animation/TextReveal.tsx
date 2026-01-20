@@ -5,16 +5,19 @@ import { motion } from "framer-motion";
 export const TextReveal = ({
   text,
   className = "",
-  as: Component = "h1"
+  as: Component = "h1",
 }: {
   text: string;
   className?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   as?: any;
 }) => {
   const words = text.split(" ");
 
   return (
-    <Component className={`${className} overflow-hidden flex flex-wrap justify-center`}>
+    <Component
+      className={`${className} overflow-hidden flex flex-wrap justify-center`}
+    >
       <motion.span
         variants={staggerContainer}
         initial="initial"
@@ -23,10 +26,7 @@ export const TextReveal = ({
       >
         {words.map((word, i) => (
           <span key={i} className="relative overflow-hidden inline-block">
-            <motion.span
-              variants={textReveal}
-              className="inline-block"
-            >
+            <motion.span variants={textReveal} className="inline-block">
               {word}
             </motion.span>
           </span>

@@ -20,6 +20,7 @@ export const BackgroundRippleEffect = ({
     col: number;
   } | null>(null);
   const [rippleKey, setRippleKey] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null);
 
   return (
@@ -48,9 +49,7 @@ export const BackgroundRippleEffect = ({
           }}
           interactive
         />
-        <div className="absolute inset-0 z-10">
-            {children}
-        </div>
+        <div className="absolute inset-0 z-10">{children}</div>
       </div>
     </div>
   );
@@ -86,7 +85,7 @@ const DivGrid = ({
 }: DivGridProps) => {
   const cells = useMemo(
     () => Array.from({ length: rows * cols }, (_, idx) => idx),
-    [rows, cols],
+    [rows, cols]
   );
 
   const gridStyle: React.CSSProperties = {
@@ -125,7 +124,7 @@ const DivGrid = ({
             className={cn(
               "cell relative border-[0.5px] opacity-10 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_20px_1px_var(--color-primary)_inset]",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
-              !interactive && "pointer-events-none",
+              !interactive && "pointer-events-none"
             )}
             style={{
               backgroundColor: clickedCell ? fillColor : "transparent",

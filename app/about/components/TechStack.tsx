@@ -1,6 +1,7 @@
 "use client";
 import TechComponent from "@/app/about/components/TechComponent";
 import CommonWrapper from "@/components/common/animation/CommonWrapper";
+import { ConstellationBackground } from "@/components/common/animation/ConstellationBackground";
 import { TechOrbit } from "@/components/ui/tech-orbit";
 import { Code, Tools, Web } from "@/data/TechStack";
 import { motion } from "framer-motion";
@@ -27,6 +28,7 @@ const TechStack = () => {
 
   return (
     <CommonWrapper className="common-layout flex flex-col justify-center max-w-[1350px] gap-8 relative overflow-hidden">
+      <ConstellationBackground />
 
       <div className="mx-auto px-4 md:px-8 flex justify-center flex-col gap-4 text-center lg:px-10 z-10">
         <p className="text-label">

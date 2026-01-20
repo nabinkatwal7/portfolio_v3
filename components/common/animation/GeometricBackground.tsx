@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 export function GeometricBackground() {
-  const shapes = [
-    { type: "circle", cx: "10%", cy: "20%", r: 100 },
-    { type: "circle", cx: "90%", cy: "80%", r: 150 },
-    { type: "rect", x: "70%", y: "10%", width: 120, height: 120 },
-    { type: "polygon", points: "15,30 30,10 45,30" },
-  ];
+  // const shapes = [
+  //   { type: "circle", cx: "10%", cy: "20%", r: 100 },
+  //   { type: "circle", cx: "90%", cy: "80%", r: 150 },
+  //   { type: "rect", x: "70%", y: "10%", width: 120, height: 120 },
+  //   { type: "polygon", points: "15,30 30,10 45,30" },
+  // ];
 
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">

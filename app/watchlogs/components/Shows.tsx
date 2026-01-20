@@ -1,4 +1,5 @@
 "use client";
+import { AuroraBackground } from "@/components/common/animation/AuroraBackground";
 import { slideData, slideDataBook } from "@/data/showsData";
 import { scaleIn, slideUp, staggerContainer } from "@/utils/motion-variants";
 import { AnimatePresence, motion } from "framer-motion";
@@ -27,7 +28,13 @@ const MediaCard = ({ title, src }: { title: string; src: string }) => (
   </motion.div>
 );
 
-const SectionHeader = ({ activeTab, onTabChange }: { activeTab: string, onTabChange: (tab: string) => void }) => (
+const SectionHeader = ({
+  activeTab,
+  onTabChange,
+}: {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+}) => (
   <motion.div
     variants={staggerContainer}
     initial="initial"
@@ -37,18 +44,35 @@ const SectionHeader = ({ activeTab, onTabChange }: { activeTab: string, onTabCha
   >
     <motion.div variants={slideUp} className="flex flex-col gap-2">
       <h2 className="heading-section text-4xl">My Collection</h2>
-      <p className="text-body opacity-60">A curated list of stories and cinema that have left an impression.</p>
+      <p className="text-body opacity-60">
+        A curated list of stories and cinema that have left an impression.
+      </p>
     </motion.div>
-    <motion.div variants={slideUp} className="flex p-1.5 bg-[var(--color-primary)]/5 rounded-full border border-[var(--color-primary)]/10 backdrop-blur-md">
+
+    <motion.div
+      variants={slideUp}
+      className="flex p-1.5 bg-[var(--color-primary)]/5 rounded-full border border-[var(--color-primary)]/10 backdrop-blur-md"
+    >
       <button
         onClick={() => onTabChange("shows")}
-        className={`px-8 py-2.5 rounded-full text-label transition-all duration-500 cursor-pointer ${activeTab === "shows" ? "bg-[var(--color-primary)] text-[var(--primary-foreground)] shadow-xl scale-105" : "hover:bg-[var(--color-primary)]/10 text-[var(--color-text-main)]/50 dark:text-[var(--color-text-main)]/50"}`}
+        className={`px-8 py-2.5 rounded-full text-label transition-all duration-500 cursor-pointer
+          ${
+            activeTab === "shows"
+              ? "bg-[var(--color-primary)] !text-white shadow-xl scale-105 ring-1 ring-[var(--color-primary)]/40"
+              : "hover:bg-[var(--color-primary)]/10 text-[var(--color-text-main)]/70"
+          }`}
       >
         Cinema & Shows ({slideData.length})
       </button>
+
       <button
         onClick={() => onTabChange("books")}
-        className={`px-8 py-2.5 rounded-full text-label transition-all duration-500 cursor-pointer ${activeTab === "books" ? "bg-[var(--color-primary)] text-[var(--primary-foreground)] shadow-xl scale-105" : "hover:bg-[var(--color-primary)]/10 text-[var(--color-text-main)]/50 dark:text-[var(--color-text-main)]/50"}`}
+        className={`px-8 py-2.5 rounded-full text-label transition-all duration-500 cursor-pointer
+          ${
+            activeTab === "books"
+              ? "bg-[var(--color-primary)] !text-white shadow-xl scale-105 ring-1 ring-[var(--color-primary)]/40"
+              : "hover:bg-[var(--color-primary)]/10 text-[var(--color-text-main)]/70"
+          }`}
       >
         Reading List ({slideDataBook.length})
       </button>
@@ -61,22 +85,26 @@ const LibraryContent = () => {
   const displayData = activeTab === "shows" ? slideData : slideDataBook;
 
   return (
-    <div className="common-layout max-w-[1350px] py-20">
-      <SectionHeader activeTab={activeTab} onTabChange={setActiveTab} />
-      <motion.div
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
-        layout
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8"
-      >
-        <AnimatePresence mode="popLayout" initial={false}>
-          {displayData.map((item, idx) => (
-            <MediaCard key={`${activeTab}-${idx}`} {...item} />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+    <div className="relative overflow-hidden">
+      <AuroraBackground />
+      <div className="common-layout max-w-[1350px] py-20">
+        <SectionHeader activeTab={activeTab} onTabChange={setActiveTab} />
+
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          layout
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8"
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
+            {displayData.map((item, idx) => (
+              <MediaCard key={`${activeTab}-${idx}`} {...item} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
+import { SpectrumBarsBackground } from "@/components/common/animation/SpectrumBarsBackground";
 import { TextReveal } from "@/components/common/animation/TextReveal";
-import { WaveBackground } from "@/components/common/animation/WaveBackground";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { slideUp, staggerContainer } from "@/utils/motion-variants";
 import { motion } from "framer-motion";
@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <div className="relative w-full overflow-hidden min-h-[60vh] flex flex-col items-center justify-center">
-      <WaveBackground />
+      <SpectrumBarsBackground />
       <BackgroundRippleEffect className="-z-10">
         <motion.div
           variants={staggerContainer}

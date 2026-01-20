@@ -14,7 +14,12 @@ interface OrbitProps {
   reverse?: boolean;
 }
 
-const OrbitRing = ({ items, radius, duration = 20, reverse = false }: OrbitProps) => {
+const OrbitRing = ({
+  items,
+  radius,
+  duration = 20,
+  reverse = false,
+}: OrbitProps) => {
   return (
     <motion.div
       className="absolute flex items-center justify-center rounded-full border border-[var(--color-bg-light)]/30"
@@ -31,7 +36,7 @@ const OrbitRing = ({ items, radius, duration = 20, reverse = false }: OrbitProps
     >
       {items.map((item, index) => {
         const angle = (index / items.length) * 360;
-        const radian = (angle * Math.PI) / 180;
+        // const radian = (angle * Math.PI) / 180;
 
         // We position items on the ring using trigonometry, but since the ring rotates,
         // we can just place them statically relative to the container and the container rotation does the rest.
@@ -51,23 +56,23 @@ const OrbitRing = ({ items, radius, duration = 20, reverse = false }: OrbitProps
             }}
           >
             <motion.div
-               animate={{ rotate: reverse ? 360 : -360 }}
-               transition={{
-                 duration: duration,
-                 repeat: Infinity,
-                 ease: "linear",
-               }}
-               className="w-full h-full flex items-center justify-center"
+              animate={{ rotate: reverse ? 360 : -360 }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="w-full h-full flex items-center justify-center"
             >
-             <Image
-              src={item.image}
-              alt={item.name}
-              width={40}
-              height={40}
-              className="w-full h-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)] dark:drop-shadow-none"
-            />
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={40}
+                height={40}
+                className="w-full h-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)] dark:drop-shadow-none"
+              />
             </motion.div>
-             {/* Tooltip on hover could go here */}
+            {/* Tooltip on hover could go here */}
           </motion.div>
         );
       })}
@@ -75,25 +80,33 @@ const OrbitRing = ({ items, radius, duration = 20, reverse = false }: OrbitProps
   );
 };
 
-export const TechOrbit = ({ code, tools, web }: { code: TechItem[], tools: TechItem[], web: TechItem[] }) => {
-    // Slice huge lists to avoid visual clutter in the orbit
-    // We can show the full list below or in a marquee if needed.
-    // For now, let's try to fit most important ones or reasonable chunks.
+export const TechOrbit = ({
+  code,
+  tools,
+  web,
+}: {
+  code: TechItem[];
+  tools: TechItem[];
+  web: TechItem[];
+}) => {
+  // Slice huge lists to avoid visual clutter in the orbit
+  // We can show the full list below or in a marquee if needed.
+  // For now, let's try to fit most important ones or reasonable chunks.
 
-    const webCore = web.slice(0, 10); // Top 10 web
-    // Note: User might want ALL. But 37 is too many for one ring.
-    // Let's do 3 rings.
+  const webCore = web.slice(0, 10); // Top 10 web
+  // Note: User might want ALL. But 37 is too many for one ring.
+  // Let's do 3 rings.
 
   return (
     <div className="relative flex items-center justify-center w-[800px] h-[800px] overflow-hidden">
       {/* Core - Me or Logo */}
       <div className="z-10 bg-[var(--color-primary)]/20 backdrop-blur-2xl backdrop-saturate-200 p-4 rounded-full shadow-lg border-4 border-[var(--color-primary)]/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-[var(--color-primary)]/10 animate-pulse" />
-         <div className="w-20 h-20 flex items-center justify-center text-[var(--color-primary)] font-bold text-xl">
-             Tech
-         </div>
-         {/* Ping animation effect */}
-         <div className="absolute inset-0 rounded-full bg-[var(--color-primary)] opacity-20 animate-ping"></div>
+        <div className="w-20 h-20 flex items-center justify-center text-[var(--color-primary)] font-bold text-xl">
+          Tech
+        </div>
+        {/* Ping animation effect */}
+        <div className="absolute inset-0 rounded-full bg-[var(--color-primary)] opacity-20 animate-ping"></div>
       </div>
 
       {/* Rings */}

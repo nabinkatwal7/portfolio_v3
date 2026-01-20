@@ -1,4 +1,5 @@
 "use client";
+import { HexagonBackground } from "@/components/common/animation/HexagonBackground";
 import { scaleInBounce, staggerContainer } from "@/utils/motion-variants";
 import { motion } from "framer-motion";
 
@@ -10,7 +11,8 @@ const stats = [
 
 const Statistics = () => {
   return (
-    <div className="common-layout">
+    <div className="relative common-layout overflow-hidden">
+      <HexagonBackground />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.dl
           variants={staggerContainer}

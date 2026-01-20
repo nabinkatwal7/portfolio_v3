@@ -8,16 +8,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function PostCard(props: any) {
   const { title, author, mainImage, publishedAt, categories } = props;
 
   return (
-    <motion.div
-      variants={slideInUp}
-      whileHover="hover"
-      className="h-full"
-    >
-      <Link className="group block h-full" href={`/blog/${props.slug!.current}`}>
+    <motion.div variants={slideInUp} whileHover="hover" className="h-full">
+      <Link
+        className="group block h-full"
+        href={`/blog/${props.slug!.current}`}
+      >
         <article className="h-full bg-[var(--color-primary)]/5 backdrop-blur-md rounded-2xl shadow-sm border border-[var(--color-primary)]/10 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:border-[var(--color-primary)]/30">
           {mainImage && (
             <div className="w-full h-64 overflow-hidden relative">

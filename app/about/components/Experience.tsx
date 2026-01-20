@@ -1,4 +1,5 @@
 "use client";
+import { FilmStripBackground } from "@/components/common/animation/FilmStripBackground";
 import { Timeline } from "@/components/ui/timeline";
 import { slideInUp } from "@/utils/motion-variants";
 import { motion } from "framer-motion";
@@ -68,15 +69,18 @@ const Experience = () => {
   ];
 
   return (
-    <motion.div
-      variants={slideInUp}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, amount: 0.1 }}
-      className="w-full common-layout max-md:pb-20"
-    >
-      <Timeline data={data} />
-    </motion.div>
+    <div className="relative overflow-hidden">
+      <FilmStripBackground />
+      <motion.div
+        variants={slideInUp}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.1 }}
+        className="w-full common-layout max-md:pb-20"
+      >
+        <Timeline data={data} />
+      </motion.div>
+    </div>
   );
 };
 

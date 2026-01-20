@@ -1,3 +1,4 @@
+import { floatIn } from "@/utils/motion-variants";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
@@ -8,25 +9,24 @@ const TechComponent = ({ name, image }: { name: string; image: string }) => {
   return (
     <motion.div
       key={name}
-      className="bg-white/5 p-8 sm:p-10 rounded-xl shadow-xl relative flex items-center justify-center"
+      variants={floatIn}
+      className="bg-white dark:bg-[var(--color-primary)]/15 backdrop-blur-md backdrop-saturate-200 p-8 sm:p-10 rounded-xl shadow-sm border border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/20 hover:border-[var(--color-primary)]/40 relative flex items-center justify-center transition-all duration-300 group"
       // variants={itemVariants}
       whileHover={{
-        scale: 1.1,
-        boxShadow: "0px 15px 40px rgba(255, 255, 255, 0.15)",
+        scale: 1.05,
       }}
-      animate="floating"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered ? (
-        <span className="text-white text-xl font-semibold">{name}</span>
+        <span className="text-[var(--color-text-main)] text-xl font-semibold z-10">{name}</span>
       ) : (
         <Image
           alt={name}
           src={image}
           width={158}
           height={48}
-          className="max-h-12 w-full object-contain"
+          className="max-h-12 w-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)] dark:drop-shadow-none"
         />
       )}
     </motion.div>

@@ -1,22 +1,64 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
-
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
   --font-Logo: "Great Vibes";
-  --font-body: "Alata";
-  --color-primary: #f5a73b;
+  --font-body: var(--font-syne);
+
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+
+  /* Typography System Tokens */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.015em;
+
+  --font-weight-display: 800;
+  --font-weight-heading: 700;
+  --font-weight-body: 400;
+  --font-weight-medium: 500;
+
+  /* Animations */
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
+
+  /* Semantic mappings for easier refactoring */
+  --color-text-main: var(--foreground);
+  --color-text-muted: var(--muted-foreground);
+  --color-bg-light: var(--muted);
+  --color-bg-lightest: var(--background);
+  --color-accent-light: var(--muted);
+}
+
+@keyframes cell-ripple {
+   0% { opacity: 0.1; }
+   50% { opacity: 0.5; }
+   100% { opacity: 0.1; }
+}
+
+:root {
+  --background: #ffffff;
+  --background-alt: #f8fafc;
+  --foreground: #0f172a; /* Slate 900 */
+  --primary: #7c3aed; /* Violet 600 - darker for light mode contrast */
+  --primary-foreground: #ffffff;
+  --muted: #f1f5f9; /* Slate 100 */
+  --muted-foreground: #475569; /* Slate 600 */
+}
+
+.dark {
+  --background: #020617; /* Slate 950 */
+  --background-alt: #0f172a; /* Slate 900 */
+  --foreground: #f8fafc; /* Slate 50 */
+  --primary: #a78bfa; /* Violet 400 */
+  --primary-foreground: #020617;
+  --muted: #1e293b; /* Slate 800 */
+  --muted-foreground: #94a3b8; /* Slate 400 */
 }
 
 .background-gradient {
-  background-color: #003366;
-  background-image: linear-gradient(315deg, #003366 0%, #242124 74%);
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: var(--background);
 }
 
 .common-layout {
@@ -25,21 +67,46 @@
 
 html {
   scrollbar-width: none;
+  scroll-behavior: smooth;
 } /* Firefox */
 body {
   -ms-overflow-style: none;
 } /* IE and Edge */
-body::-webkit-scrollbar,
-body::-webkit-scrollbar-button {
-  display: none;
+/* Typography Utility Classes */
+@layer utilities {
+  .heading-display {
+    @apply text-4xl sm:text-6xl font-[var(--font-weight-display)] tracking-tighter text-[var(--color-text-main)] leading-[1.05] text-pretty;
+  }
+
+  .heading-section {
+    @apply text-3xl sm:text-4xl font-[var(--font-weight-heading)] tracking-tight text-[var(--color-text-main)] leading-tight text-pretty;
+  }
+
+  .heading-card {
+    @apply text-xl font-[var(--font-weight-heading)] text-[var(--color-text-main)] leading-snug;
+  }
+
+  .text-body {
+    @apply text-base sm:text-lg font-[var(--font-weight-body)] text-[var(--color-text-muted)] leading-relaxed;
+  }
+
+  .bg-alternate {
+    background-color: var(--background-alt);
+  }
+
+  .text-label {
+    @apply text-xs font-[var(--font-weight-medium)] uppercase tracking-widest text-[var(--color-primary)];
+  }
+
+  .text-small {
+    @apply text-sm text-[var(--color-text-muted)] leading-normal;
+  }
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

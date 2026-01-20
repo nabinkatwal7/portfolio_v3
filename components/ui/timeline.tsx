@@ -33,12 +33,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       ref={containerRef}
     >
       <div className="mx-auto px-4 md:px-8 flex justify-center flex-col gap-4 text-center lg:px-10">
-        <h2 className="text-lg md:text-4xl mb-4 ">🚀 Buckle Up, Folks! 🚀</h2>
-        <p className="text-sm md:text-base">
+        <h2 className="heading-section">🚀 Buckle Up, Folks! 🚀</h2>
+        <p className="text-body max-w-3xl mx-auto">
           Since 2023, I&apos;ve been stirring the pot at
-          <b> AITC International</b>
+          <span className="text-[var(--color-primary)] font-bold"> AITC International</span>
           —coding, innovating, and occasionally convincing my laptop <i>not </i>
-          to explode. 💥 Here&apos;s the behind-the-scenes drama of my journey!
+          to explode. Here&apos;s the behind-the-scenes drama of my journey!
           🎬
         </p>
       </div>
@@ -73,14 +73,14 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           style={{
             height: height + "px",
           }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
+          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[var(--color-bg-light)] from-transparent from-[0%] via-neutral-200 to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
         >
           <motion.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
+            className="absolute inset-x-0 top-0  w-[2px] bg-[var(--color-primary)] from-[0%] via-[10%] rounded-full"
           />
         </div>
       </div>

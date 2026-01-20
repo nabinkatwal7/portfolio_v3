@@ -4,9 +4,11 @@ import CTA from "@/components/home/CTA";
 
 function Page() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col relative min-h-screen">
       <Hero />
-      <ProjectListing />
+      <div className="bg-alternate py-12">
+        <ProjectListing />
+      </div>
       <CTA />
     </div>
   );

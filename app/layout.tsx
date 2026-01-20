@@ -1,16 +1,29 @@
 import Overlay from "@/components/common/animation/Overlay";
+import { PageTransition } from "@/components/common/animation/PageTransition";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 import { SanityLive } from "@/sanity/lib/live";
 import { Analytics } from "@vercel/analytics/react";
 
+import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
+import { Syne } from "next/font/google"; // Import Syne
 import React from "react";
 import "./globals.css";
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne", // Define a variable
+  weight: ["400", "500", "600", "700", "800"], // Include weights
+});
+
 
 export const metadata: Metadata = {
   title: "Nabin Katwal",
   description: "Hello!",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -19,16 +32,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${syne.variable}`} suppressHydrationWarning>
       <body
-        className={`antialiased relative font-body text-[#FAF5F6] bg-[#252525] background-gradient`}
+        className={`antialiased relative font-body text-[var(--color-text-main)] background-gradient transition-colors duration-300`}
       >
-        <Analytics />
-        <Overlay />
-        <Header />
-        <div className={""}>{children}</div>
-        <Footer />
-        <SanityLive />
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+          <Analytics />
+          <Overlay />
+          <Header />
+          <PageTransition>
+            {children}
+          </PageTransition>
+          <Footer />
+          <SanityLive />
+        </ThemeProvider>
       </body>
     </html>
   );

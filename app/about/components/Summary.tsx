@@ -1,7 +1,6 @@
+import CommonLink from "@/components/common/CommonLink";
 import CommonWrapper from "@/components/common/animation/CommonWrapper";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
-import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa";
 
 export const summary = [
   {
@@ -25,18 +24,13 @@ export const summary = [
 
 const Summary = () => {
   return (
-    <CommonWrapper className="common-layout max-w-[1350px] flex flex-col items-center justify-center gap-8">
-      <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+    <CommonWrapper className="common-layout max-w-[1350px] flex flex-col items-center justify-center gap-4">
+      <p className="text-label">Experience</p>
+      <h2 className="heading-section">
         Professional Summary
       </h2>
       <HoverEffect items={summary} />
-      <Link
-        href="/projects"
-        className="text-base font-semibold bg-primary px-3.5 py-2.5 rounded-md shadow-sm hover:bg-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary flex flex-row gap-2 items-center"
-      >
-        <p>View Projects</p>
-        <FaArrowRight />
-      </Link>
+      <CommonLink href="/projects" title="View Projects" />
     </CommonWrapper>
   );
 };

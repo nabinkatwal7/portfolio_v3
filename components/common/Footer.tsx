@@ -1,11 +1,10 @@
-import CommonWrapper from "@/components/common/animation/CommonWrapper";
-import Image from "next/image";
+"use client";
+import { slideUp, staggerContainer } from "@/utils/motion-variants";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  FaFacebookSquare,
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
+    FaGithub,
+    FaLinkedin,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -18,16 +17,6 @@ const navigation = {
     { name: "Watchlog", href: "/watchlogs" },
   ],
   social: [
-    {
-      name: "Facebook",
-      href: "#",
-      icon: <FaFacebookSquare />,
-    },
-    {
-      name: "Instagram",
-      href: "#",
-      icon: <FaInstagram />,
-    },
     {
       name: "X",
       href: "https://x.com/tim_fringe",
@@ -48,52 +37,59 @@ const navigation = {
 
 const Footer = () => {
   return (
-    <CommonWrapper>
-      <footer className="pb-6">
-        <div className=" w-full flex flex-col items-center justify-center content-center overflow-hidden common-layout">
-          <div className="flex flex-col items-center justify-center p-6">
-            <Image
-              src="/images/logo.png"
-              alt="logo"
-              width={800}
-              height={350}
-              className="w-full"
-            />
-          </div>
-          <nav
+    <footer className="py-12 border-t border-[var(--color-primary)]/10">
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.1 }}
+        className="common-layout max-w-7xl"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Brand */}
+          <motion.div variants={slideUp} className="flex flex-col items-center md:items-start">
+            <Link href="/" className="text-3xl font-[var(--font-Logo)] font-bold text-[var(--color-primary)] hover:opacity-80 transition-opacity mb-2">
+              Nabin Katwal
+            </Link>
+            <p className="text-sm text-[var(--color-text-main)]/50 dark:text-[var(--color-text-main)]/30">
+              © {new Date().getFullYear()} Built with passion.
+            </p>
+          </motion.div>
+
+          {/* Navigation */}
+          <motion.nav
+            variants={slideUp}
             aria-label="Footer"
-            className="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6"
+            className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm"
           >
             {navigation.main.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="hover:text-white"
+                className="hover:text-[var(--color-primary)] text-[var(--color-text-main)]/80 dark:text-[var(--color-text-main)]/60 transition-colors duration-300"
               >
                 {item.name}
               </Link>
             ))}
-          </nav>
-          <div className="mt-16 flex justify-center gap-x-10">
+          </motion.nav>
+
+          {/* Social Links */}
+          <motion.div variants={slideUp} className="flex justify-center gap-x-6">
             {navigation.social.map((item) => (
               <Link
                 target="_blank"
                 key={item.name}
                 href={item.href}
-                className=" hover:text-gray-300"
+                className="text-xl hover:text-[var(--color-primary)] text-[var(--color-text-main)]/70 dark:text-[var(--color-text-main)]/40 hover:scale-110 transition-all duration-300"
               >
                 <span className="sr-only">{item.name}</span>
                 {item.icon}
               </Link>
             ))}
-          </div>
-
-          <p className="mt-10 text-center text-sm/6 text-gray-400">
-            &copy; {new Date().getFullYear()} Nabin Katwal. All rights reserved.
-          </p>
+          </motion.div>
         </div>
-      </footer>
-    </CommonWrapper>
+      </motion.div>
+    </footer>
   );
 };
 

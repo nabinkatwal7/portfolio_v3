@@ -9,15 +9,23 @@ import CTA from "@/components/home/CTA";
 
 function Page() {
   return (
-    <div>
+    <div className="flex flex-col relative min-h-screen">
       <Hero />
-      <Story />
+      <div className="bg-alternate py-10">
+        <Story />
+      </div>
       <TechStack />
-      <Experience />
+      <div className="bg-alternate py-10">
+        <Experience />
+      </div>
       <Summary />
-      <Education />
+      <div className="bg-alternate py-10">
+        <Education />
+      </div>
       <Hobbies />
-      <CTA />
+      <div className="bg-alternate/50 py-10">
+        <CTA />
+      </div>
     </div>
   );
 }

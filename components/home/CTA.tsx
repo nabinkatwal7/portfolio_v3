@@ -1,36 +1,43 @@
 "use client";
-import CommonWrapper from "@/components/common/animation/CommonWrapper";
+import { slideUp, staggerContainer } from "@/utils/motion-variants";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 const CTA = () => {
   return (
-    <CommonWrapper>
-      <div className="common-layout">
-        <div className="relative isolate overflow-hidden text-center sm:rounded-3xl sm:px-16">
-          <h2 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
-            Let&apos;s build something together
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-300">
-            I&apos;m always open to new opportunities. If you have a project or
-            idea that you want to bring to life, let&apos;s talk.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link
-              href="mailto:mediocampistaa@gmail.com"
-              className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold shadow-xs hover:bg-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary text-white"
-            >
-              Contact me
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm/6 font-semibold text-primary"
-            >
-              Learn more <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </CommonWrapper>
+    <div className="common-layout py-24">
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.3 }}
+        className="mx-auto max-w-3xl text-center"
+      >
+        <motion.h2 variants={slideUp} className="heading-section text-4xl md:text-5xl">
+          Ready to Build Something{" "}
+          <span className="text-[var(--color-primary)]">Extraordinary?</span>
+        </motion.h2>
+        <motion.p variants={slideUp} className="mx-auto mt-8 max-w-xl text-body text-lg text-[var(--color-text-main)]/70">
+          Whether you have a fully-fledged idea or just a spark of
+          inspiration, I&apos;m here to help you bring it to life. Let&apos;s
+          collaborate and create something that truly stands out.
+        </motion.p>
+        <motion.div variants={slideUp} className="mt-12 flex items-center justify-center gap-x-8">
+          <Link
+            href="mailto:mediocampistaa@gmail.com"
+            className="rounded-full bg-[var(--color-primary)] px-8 py-4 text-base font-bold shadow-xl hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary text-[var(--primary-foreground)] transition-all hover:scale-105 active:scale-95"
+          >
+            Get in Touch
+          </Link>
+          <Link
+            href="/about"
+            className="text-base font-bold text-[var(--color-primary)] hover:underline underline-offset-8 transition-all"
+          >
+            Learn more <span aria-hidden="true" className="ml-1">→</span>
+          </Link>
+        </motion.div>
+      </motion.div>
+    </div>
   );
 };
 

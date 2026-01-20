@@ -1,6 +1,7 @@
 "use client";
 import TechComponent from "@/app/about/components/TechComponent";
 import CommonWrapper from "@/components/common/animation/CommonWrapper";
+import { TechOrbit } from "@/components/ui/tech-orbit";
 import { Code, Tools, Web } from "@/data/TechStack";
 import { motion } from "framer-motion";
 
@@ -8,101 +9,90 @@ const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.08 },
   },
 };
 
 const TechStack = () => {
-  return (
-    <CommonWrapper className="common-layout flex flex-col justify-center max-w-[1350px] gap-8 relative">
-      {/* Floating Water Effect */}
-      <div className="absolute inset-0 bg-blue-900/50 blur-3xl opacity-40 rounded-2xl"></div>
+    // Select specific impactful web technologies for the orbit to prevent overcrowding
+    // We want Next.js (index 14), React (20), Tailwind (28), TypeScript (31), Node (15), etc.
+    // Let's filter by name for better control, or just take a curated slice.
 
-      <div className="mx-auto px-4 md:px-8 flex justify-center flex-col gap-4 text-center lg:px-10">
-        <p className="text-base/7 font-semibold text-indigo-400 text-center">
+    // Curated list for the outer orbit
+    const orbitWeb = Web.filter(item =>
+        ["Next JS", "React", "TailwindCSS", "TypeScript", "Node JS", "Framer", "Vite", "Docker", "AWS", "Three js"].includes(item.name)
+    );
+    // If not enough matches, fallback to slice
+    const finalOrbitWeb = orbitWeb.length > 5 ? orbitWeb : Web.slice(0, 10);
+
+  return (
+    <CommonWrapper className="common-layout flex flex-col justify-center max-w-[1350px] gap-8 relative overflow-hidden">
+
+      <div className="mx-auto px-4 md:px-8 flex justify-center flex-col gap-4 text-center lg:px-10 z-10">
+        <p className="text-label">
           My Tech Stack
         </p>
-        <h2 className="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-center">
-          Building the Future, One Line of Code at a Time
+        <h2 className="heading-section">
+          Building the Future, One Line at a Time
         </h2>
-        <p>
-          Listen, a developer is only as good as their tools. You wouldn&apos;t
-          trust a lawyer without a briefcase, and you sure as hell
-          shouldn&apos;t trust a coder without a solid tech stack. From frontend
+        <p className="text-body max-w-3xl mx-auto">
+          A developer is only as good as their tools. From frontend
           wizardry with React and Tailwind to backend muscle with Go and Rust,
-          I&apos;ve got the whole package. Need scalable apps? Boom—Next.js.
-          Need slick animations? Framer Motion&apos;s got it covered. Need
-          speed? Vite, baby. And let&apos;s not forget the essentials—Git,
-          Docker, AWS—because even the best code needs a rock-solid foundation.
-          So, if you&apos;re looking for top-tier tech, you just found it.
-          Let&apos;s build something legendary.
+          I leverage the best technology to build robust, scalable applications.
         </p>
       </div>
 
-      <div className="flex flex-col gap-4 justify-center">
-        <p className="text-3xl font-semibold tracking-tight text-pretty text-center">
-          Web Technologies
-        </p>
-        <div className="mx-auto w-full px-6 lg:px-8 relative">
-          <motion.div
-            className="-mx-6 grid grid-cols-2 gap-0.5 sm:mx-0 sm:rounded-2xl md:grid-cols-3 relative"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {Web.map((item) => (
-              <TechComponent
-                key={item.name}
-                name={item.name}
-                image={item.image}
-              />
-            ))}
-          </motion.div>
-        </div>
+      {/* Solar System for Desktop */}
+      <div className="hidden lg:flex items-center justify-center min-h-[850px] -my-20 scale-90 xl:scale-100">
+         <TechOrbit code={Code} tools={Tools} web={finalOrbitWeb} />
       </div>
 
-      <div className="flex flex-col gap-4 justify-center">
-        <p className="text-3xl font-semibold tracking-tight text-pretty text-center">
-          Programming
-        </p>
-        <div className="mx-auto w-full px-6 lg:px-8 relative">
-          <motion.div
-            className="-mx-6 grid grid-cols-2 gap-0.5 sm:mx-0 sm:rounded-2xl md:grid-cols-3 relative"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {Code.map((item) => (
-              <TechComponent
-                key={item.name}
-                name={item.name}
-                image={item.image}
-              />
-            ))}
-          </motion.div>
-        </div>
-      </div>
+      {/* Grid/List for Mobile (Full View) */}
+      <div className="flex flex-col gap-8 justify-center lg:hidden">
 
-      <div className="flex flex-col gap-4 justify-center">
-        <p className="text-3xl font-semibold tracking-tight text-pretty text-center">
-          Tools
-        </p>
-        <div className="mx-auto w-full px-6 lg:px-8 relative">
-          <motion.div
-            className="-mx-6 grid grid-cols-2 gap-0.5 sm:mx-0 sm:rounded-2xl md:grid-cols-3 relative"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {Tools.map((item) => (
-              <TechComponent
-                key={item.name}
-                name={item.name}
-                image={item.image}
-              />
-            ))}
-          </motion.div>
+        <div className="flex flex-col gap-4 justify-center">
+            <h3 className="text-2xl font-semibold text-center text-[var(--color-text-main)]">Web Technologies</h3>
+            <div className="mx-auto w-full px-6 relative">
+              <motion.div
+                className="grid grid-cols-2 gap-2 sm:grid-cols-3"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                {Web.slice(0, 12).map((item) => (
+                  <TechComponent
+                    key={item.name}
+                    name={item.name}
+                    image={item.image}
+                  />
+                ))}
+                 {/* Show a "View All" or just limit it on mobile to save space? User didn't specify. */}
+              </motion.div>
+            </div>
         </div>
+
+        <div className="flex flex-col gap-4 justify-center">
+            <h3 className="text-2xl font-semibold text-center text-[var(--color-text-main)]">Programming & Tools</h3>
+            <div className="mx-auto w-full px-6 relative">
+                <motion.div
+                    className="grid grid-cols-2 gap-2 sm:grid-cols-3"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                >
+                    {[...Code, ...Tools].slice(0, 12).map((item) => (
+                    <TechComponent
+                        key={item.name}
+                        name={item.name}
+                        image={item.image}
+                    />
+                    ))}
+                </motion.div>
+            </div>
+        </div>
+
       </div>
     </CommonWrapper>
   );

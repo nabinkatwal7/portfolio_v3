@@ -5,11 +5,15 @@ import Statistics from "@/components/home/Statistics";
 
 export default function Home() {
   return (
-    <div className={"flex flex-col gap-12 relative"}>
+    <div className="flex flex-col relative min-h-screen">
       <Hero />
-      <Description />
+      <div className="bg-alternate py-10">
+        <Description />
+      </div>
       <Statistics />
-      <CTA />
+      <div className="bg-alternate py-10">
+        <CTA />
+      </div>
     </div>
   );
 }

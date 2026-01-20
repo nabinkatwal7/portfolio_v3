@@ -68,7 +68,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10 "
+        className="flex flex-1 flex-col items-center justify-center relative text-center text-[var(--color-text-main)] opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10 "
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -113,7 +113,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             current === index ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <h2 className="text-lg md:text-2xl bg-primary/80 px-4 py-2 rounded-md lg:text-4xl font-semibold  relative">
+          <h2 className="heading-card bg-[var(--color-background)]/20 backdrop-blur-md px-6 py-3 rounded-xl border border-[var(--color-primary)]/10 shadow-sm relative">
             {title}
           </h2>
         </article>
@@ -135,13 +135,13 @@ const CarouselControl = ({
 }: CarouselControlProps) => {
   return (
     <button
-      className={`w-10 h-10 flex items-center mx-2 justify-center bg-primary border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
+      className={`w-10 h-10 flex items-center mx-2 justify-center bg-[var(--color-bg-light)] border-3 border-transparent rounded-full focus:border-[var(--color-primary)] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
         type === "previous" ? "rotate-180" : ""
       }`}
       title={title}
       onClick={handleClick}
     >
-      <FaRightLong className="text-white" />
+      <FaRightLong className="text-[var(--color-text-main)]" />
     </button>
   );
 };

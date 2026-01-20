@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa";
+import { HiArrowRight } from "react-icons/hi2";
 
 const CommonLink = ({ href, title }: { href: string; title: string }) => {
   return (
     <Link
       href={href}
-      className="text-sm/6 font-semibold flex flex-row gap-2 items-center bg-primary px-3.5 py-2.5 rounded-md shadow-sm hover:bg-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary)] px-8 py-4 text-base font-bold text-[var(--primary-foreground)] shadow-xl hover:opacity-90 active:scale-95 transition-all duration-300"
     >
-      <p>{title}</p>
-      <FaArrowRight />
+      <span>{title}</span>
+      <HiArrowRight aria-hidden="true" className="size-5" />
     </Link>
   );
 };

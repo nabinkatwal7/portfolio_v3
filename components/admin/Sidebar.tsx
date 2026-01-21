@@ -3,10 +3,13 @@
 import { logout } from "@/app/actions/auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiArrowLeft, HiArrowRightOnRectangle, HiCog, HiFilm, HiHome, HiRectangleStack, HiUserCircle } from "react-icons/hi2";
+import { HiArrowLeft, HiArrowRightOnRectangle, HiCog, HiFilm, HiHome, HiNewspaper, HiRectangleStack, HiUserCircle, HiTag, HiUserGroup } from "react-icons/hi2";
 
 const navigation = [
   { name: "Overview", href: "/admin", icon: HiHome },
+  { name: "Blog", href: "/admin/blog", icon: HiNewspaper },
+  { name: "Categories", href: "/admin/blog/categories", icon: HiTag },
+  { name: "Authors", href: "/admin/blog/authors", icon: HiUserGroup },
   { name: "Guestbook", href: "/admin/guestbook", icon: HiUserCircle },
   { name: "Watchlogs", href: "/admin/watchlogs", icon: HiFilm },
   { name: "Projects", href: "/admin/projects", icon: HiRectangleStack },
@@ -26,7 +29,7 @@ export function Sidebar() {
 
       <nav className="flex-1 p-4 flex flex-col gap-1">
         {navigation.map((item) => {
-           const isActive = pathname === item.href;
+           const isActive = pathname === item.href || (item.href !== "/admin" && pathname?.startsWith(item.href));
            return (
               <Link
                 key={item.href}

@@ -1,18 +1,32 @@
 import Hero from "@/app/(site)/watchlogs/components/Hero";
 import LibraryContent from "@/app/(site)/watchlogs/components/Shows";
-import { getWatchlogs } from "@/app/actions/common";
+import { getWatchlogsPaginated } from "@/app/actions/common";
+import { Pagination } from "@/components/common/Pagination";
 import CTA from "@/components/home/CTA";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-const Page = async () => {
-  const data = await getWatchlogs();
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) => {
+  const params = await searchParams;
+  const currentPage = parseInt(params.page || "1", 10);
+  const { data, totalPages } = await getWatchlogsPaginated(currentPage, 20);
 
   return (
     <div className="flex flex-col relative min-h-screen">
       <Hero />
       <div className="bg-alternate py-20">
-        <LibraryContent initialItems={data} />
+        <div className="common-layout max-w-[1350px]">
+          <LibraryContent initialItems={data} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            basePath="/watchlogs"
+          />
+        </div>
       </div>
       <div className="py-20">
         <CTA />

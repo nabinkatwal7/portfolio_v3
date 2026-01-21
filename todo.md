@@ -1,2 +1,1 @@
-replace sanity with custom blog.
-add code playground
+add search and categories to watchlog projects and blogs.

@@ -4,7 +4,7 @@ import { WaveBackground } from "@/components/common/animation/WaveBackground";
 import { staggerContainer } from "@/utils/motion-variants";
 import { motion } from "framer-motion";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function BlogListing({ posts }: { posts: any[] }) {
   return (
     <div className="relative overflow-hidden">
@@ -17,7 +17,7 @@ export function BlogListing({ posts }: { posts: any[] }) {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
       >
         {posts?.length > 0 ? (
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
           posts.map((post: any) => <PostCard key={post._id} {...post} />)
         ) : (
           <div className="col-span-full text-center py-24 text-[var(--color-text-main)]/50">

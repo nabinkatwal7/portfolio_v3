@@ -1,7 +1,3 @@
-import Overlay from "@/components/common/animation/Overlay";
-import { PageTransition } from "@/components/common/animation/PageTransition";
-import Footer from "@/components/common/Footer";
-import Header from "@/components/common/Header";
 import { SanityLive } from "@/sanity/lib/live";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -26,6 +22,10 @@ export const metadata: Metadata = {
   },
 };
 
+import { DynamicFontProvider } from "@/components/common/DynamicFontProvider";
+
+// ...
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,12 +43,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
           <Analytics />
-          <Overlay />
-          <Header />
-          <PageTransition>
-            {children}
-          </PageTransition>
-          <Footer />
+          <DynamicFontProvider />
+          {children}
           <SanityLive />
         </ThemeProvider>
       </body>

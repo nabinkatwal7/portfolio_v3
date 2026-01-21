@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 type CategoriesProps = {
   categories: NonNullable<any>["categories"];

@@ -1,5 +1,5 @@
 "use client";
-import TechComponent from "@/app/about/components/TechComponent";
+import TechComponent from "@/app/(site)/about/components/TechComponent";
 import CommonWrapper from "@/components/common/animation/CommonWrapper";
 import { ConstellationBackground } from "@/components/common/animation/ConstellationBackground";
 import { TechOrbit } from "@/components/ui/tech-orbit";

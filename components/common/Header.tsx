@@ -7,13 +7,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import {
-  HiBars3,
-  HiFilm,
-  HiHome,
-  HiNewspaper,
-  HiRectangleStack,
-  HiUserCircle,
-  HiXMark,
+    HiBars3,
+    HiFilm,
+    HiHome,
+    HiNewspaper,
+    HiRectangleStack,
+    HiUserCircle,
+    HiXMark,
 } from "react-icons/hi2";
 
 const navigation = [
@@ -22,6 +22,7 @@ const navigation = [
   { name: "Projects", href: "/projects", icon: HiRectangleStack },
   { name: "Blog", href: "/blog", icon: HiNewspaper },
   { name: "Watchlog", href: "/watchlogs", icon: HiFilm },
+  { name: "Guestbook", href: "/guestbook", icon: HiUserCircle },
 ];
 
 function DockIcon({
@@ -30,7 +31,7 @@ function DockIcon({
   isActive,
 }: {
   item: (typeof navigation)[0];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   mouseX: any;
   isActive: boolean;
 }) {

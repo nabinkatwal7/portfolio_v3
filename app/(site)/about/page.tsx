@@ -1,10 +1,10 @@
-import Education from "@/app/about/components/Education";
-import Experience from "@/app/about/components/Experience";
-import Hero from "@/app/about/components/Hero";
-import Hobbies from "@/app/about/components/Hobbies";
-import Story from "@/app/about/components/Story";
-import Summary from "@/app/about/components/Summary";
-import TechStack from "@/app/about/components/TechStack";
+import Education from "@/app/(site)/about/components/Education";
+import Experience from "@/app/(site)/about/components/Experience";
+import Hero from "@/app/(site)/about/components/Hero";
+import Hobbies from "@/app/(site)/about/components/Hobbies";
+import Story from "@/app/(site)/about/components/Story";
+import Summary from "@/app/(site)/about/components/Summary";
+import TechStack from "@/app/(site)/about/components/TechStack";
 import CTA from "@/components/home/CTA";
 
 function Page() {

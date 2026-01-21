@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Author } from "@/components/blog/Author";
 import { Categories } from "@/components/blog/Categories";
 import { PublishedAt } from "@/components/blog/PublishedAt";

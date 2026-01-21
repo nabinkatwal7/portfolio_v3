@@ -1,6 +1,5 @@
 "use client";
 import { AuroraBackground } from "@/components/common/animation/AuroraBackground";
-import { slideData, slideDataBook } from "@/data/showsData";
 import { scaleIn, slideUp, staggerContainer } from "@/utils/motion-variants";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -31,9 +30,13 @@ const MediaCard = ({ title, src }: { title: string; src: string }) => (
 const SectionHeader = ({
   activeTab,
   onTabChange,
+  showCount,
+  bookCount,
 }: {
   activeTab: string;
   onTabChange: (tab: string) => void;
+  showCount: number;
+  bookCount: number;
 }) => (
   <motion.div
     variants={staggerContainer}
@@ -62,7 +65,7 @@ const SectionHeader = ({
               : "hover:bg-[var(--color-primary)]/10 text-[var(--color-text-main)]/70"
           }`}
       >
-        Cinema & Shows ({slideData.length})
+        Cinema & Shows ({showCount})
       </button>
 
       <button
@@ -74,21 +77,30 @@ const SectionHeader = ({
               : "hover:bg-[var(--color-primary)]/10 text-[var(--color-text-main)]/70"
           }`}
       >
-        Reading List ({slideDataBook.length})
+        Reading List ({bookCount})
       </button>
     </motion.div>
   </motion.div>
 );
 
-const LibraryContent = () => {
+const LibraryContent = ({ initialItems = [] }: { initialItems: any[] }) => {
   const [activeTab, setActiveTab] = useState("shows");
-  const displayData = activeTab === "shows" ? slideData : slideDataBook;
+
+  const shows = initialItems.filter((item) => item.type === "shows");
+  const books = initialItems.filter((item) => item.type === "books");
+
+  const displayData = activeTab === "shows" ? shows : books;
 
   return (
     <div className="relative overflow-hidden">
       <AuroraBackground />
       <div className="common-layout max-w-[1350px] py-20">
-        <SectionHeader activeTab={activeTab} onTabChange={setActiveTab} />
+        <SectionHeader
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            showCount={shows.length}
+            bookCount={books.length}
+        />
 
         <motion.div
           variants={staggerContainer}
@@ -100,9 +112,18 @@ const LibraryContent = () => {
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {displayData.map((item, idx) => (
-              <MediaCard key={`${activeTab}-${idx}`} {...item} />
+              <MediaCard key={item.id || `${activeTab}-${idx}`} title={item.title} src={item.src} />
             ))}
           </AnimatePresence>
+          {displayData.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full py-20 text-center text-body opacity-50"
+              >
+                  No entries found in this category yet.
+              </motion.div>
+          )}
         </motion.div>
       </div>
     </div>

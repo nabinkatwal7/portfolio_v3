@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function PostCard(props: any) {
   const { title, author, mainImage, publishedAt, categories } = props;
 

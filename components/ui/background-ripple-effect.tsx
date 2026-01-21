@@ -20,7 +20,7 @@ export const BackgroundRippleEffect = ({
     col: number;
   } | null>(null);
   const [rippleKey, setRippleKey] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const ref = useRef<any>(null);
 
   return (

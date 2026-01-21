@@ -5,7 +5,13 @@ import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect
 import { slideUp, staggerContainer } from "@/utils/motion-variants";
 import { motion } from "framer-motion";
 
-function Hero() {
+function Hero({
+  title = "Digital Architect & Full-Stack Engineer",
+  bio = "I build high-performance, scalable web applications with a focus on precision engineering and editorial design. Transforming complex technical challenges into seamless, user-centric digital experiences."
+}: {
+  title?: string;
+  bio?: string;
+}) {
   return (
     <div className="relative w-full overflow-hidden min-h-[90vh] flex flex-col items-center justify-center">
       <GeometricBackground />
@@ -26,14 +32,12 @@ function Hero() {
             </motion.div>
 
             <TextReveal
-              text="Digital Architect & Full-Stack Engineer"
+              text={title}
               className="heading-display text-center leading-[1.1]"
             />
 
             <motion.p variants={slideUp} className="text-center text-body max-w-3xl text-[var(--color-text-main)]/60 text-xl md:text-2xl leading-relaxed">
-              I build high-performance, scalable web applications with a focus on
-              precision engineering and editorial design. Transforming complex technical
-              challenges into seamless, user-centric digital experiences.
+              {bio}
             </motion.p>
           </div>
         </motion.div>

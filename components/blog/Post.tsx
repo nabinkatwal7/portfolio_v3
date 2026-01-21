@@ -3,13 +3,11 @@ import { Author } from "@/components/blog/Author";
 import { Categories } from "@/components/blog/Categories";
 import { PublishedAt } from "@/components/blog/PublishedAt";
 import { Title } from "@/components/blog/Title";
-import { urlFor } from "@/sanity/lib/image";
-import { components } from "@/sanity/portableTextComponents";
-import { PortableText } from "next-sanity";
+import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
 import Image from "next/image";
 
 export function Post(props: NonNullable<any>) {
-  const { title, author, mainImage, body, publishedAt, categories } = props;
+  const { title, author, mainImage, mainImageAlt, body, publishedAt, categories } = props;
 
   return (
     <article className="mx-auto px-4 md:px-6 lg:px-8 space-y-12 max-w-4xl py-12">
@@ -30,24 +28,18 @@ export function Post(props: NonNullable<any>) {
       {mainImage && (
         <figure className="w-full relative rounded-2xl overflow-hidden shadow-2xl border border-[var(--color-primary)]/10">
           <Image
-            src={urlFor(mainImage).width(1200).height(600).url()}
+            src={mainImage}
             width={1200}
             height={600}
-            alt={title}
+            alt={mainImageAlt || title}
             className="w-full h-auto object-cover"
+            unoptimized
           />
         </figure>
       )}
 
       {body && (
-        <div className="prose prose-zinc dark:prose-invert mx-auto max-w-none
-          prose-headings:text-[var(--color-text-main)]
-          prose-p:text-[var(--color-text-muted)]
-          prose-strong:text-[var(--color-text-main)]
-          prose-a:text-[var(--color-primary)] hover:prose-a:opacity-80
-          text-lg/8">
-          <PortableText value={body} components={components} />
-        </div>
+        <MarkdownRenderer content={body} />
       )}
     </article>
   );

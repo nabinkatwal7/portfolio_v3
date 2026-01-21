@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import {
     HiBars3,
+    HiCodeBracket,
     HiFilm,
     HiHome,
     HiNewspaper,
@@ -23,6 +24,7 @@ const navigation = [
   { name: "Blog", href: "/blog", icon: HiNewspaper },
   { name: "Watchlog", href: "/watchlogs", icon: HiFilm },
   { name: "Guestbook", href: "/guestbook", icon: HiUserCircle },
+  { name: "Playground", href: "/playground", icon: HiCodeBracket },
 ];
 
 function DockIcon({

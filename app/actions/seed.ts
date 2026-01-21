@@ -2,31 +2,14 @@
 
 import { projectData } from '@/data/projectData'
 import { slideData, slideDataBook } from '@/data/showsData'
-import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import { createServiceRoleClient } from '@/utils/supabase/server'
 import { checkAuth } from './auth'
-
-// Create a service role client to bypass RLS
-const supabaseAdmin = createSupabaseClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  }
-)
 
 export async function seedDatabase() {
   const isAuth = await checkAuth()
   if (!isAuth) return { error: 'Unauthorized' }
 
-  // Use the admin client (or anon if service role missing, but warn user)
-  const supabase = supabaseAdmin
-
-  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      console.warn("SUPABASE_SERVICE_ROLE_KEY is missing. Seeding might fail due to RLS.")
-  }
+  const supabase = createServiceRoleClient()
 
   // Seed Watchlogs (Shows)
   for (const item of slideData) {

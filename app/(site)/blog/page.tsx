@@ -2,13 +2,16 @@ import { BlogListing } from "@/components/blog/BlogListing";
 import { ClientMotionDiv } from "@/components/common/animation/ClientMotionDiv";
 import { TextReveal } from "@/components/common/animation/TextReveal";
 import CTA from "@/components/home/CTA";
-import { sanityFetch } from "@/sanity/lib/live";
-import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { getBlogPostsPaginated } from "@/app/actions/common";
 import { slideUp, staggerContainer } from "@/utils/motion-variants";
+import { Pagination } from "@/components/common/Pagination";
 
+export const dynamic = 'force-dynamic';
 
-const Page = async () => {
-  const { data: posts } = await sanityFetch({ query: POSTS_QUERY });
+const Page = async ({ searchParams }: { searchParams: Promise<{ page?: string }> }) => {
+  const params = await searchParams;
+  const currentPage = parseInt(params.page || '1', 10);
+  const { data: posts, totalPages } = await getBlogPostsPaginated(currentPage, 12);
 
   return (
     <div className="flex flex-col relative min-h-screen pt-24">
@@ -39,6 +42,11 @@ const Page = async () => {
       <div className="bg-alternate py-24 border-t border-[var(--color-primary)]/10">
         <div className="common-layout max-w-[1350px]">
           <BlogListing posts={posts} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            basePath="/blog"
+          />
         </div>
       </div>
 

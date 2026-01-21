@@ -1,4 +1,3 @@
-import { SanityLive } from "@/sanity/lib/live";
 import { Analytics } from "@vercel/analytics/react";
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -45,7 +44,6 @@ export default function RootLayout({
           <Analytics />
           <DynamicFontProvider />
           {children}
-          <SanityLive />
         </ThemeProvider>
       </body>
     </html>

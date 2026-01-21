@@ -1,9 +1,12 @@
 
-import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
 type AuthorProps = {
-  author: NonNullable<any>["author"];
+  author: {
+    id?: string;
+    name?: string;
+    image?: string;
+  } | null;
 };
 
 export function Author({ author }: AuthorProps) {
@@ -11,7 +14,7 @@ export function Author({ author }: AuthorProps) {
     <div className="flex items-center gap-2">
       {author?.image ? (
         <Image
-          src={urlFor(author.image).width(80).height(80).url()}
+          src={author.image}
           width={80}
           height={80}
           alt={author.name || ""}

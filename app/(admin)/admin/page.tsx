@@ -1,52 +1,146 @@
 import { createClient } from "@/utils/supabase/server";
+import { getBlogPosts, getGuestbookEntries, getWatchlogs, getProjects } from "@/app/actions/common";
+import { DashboardStats } from "./components/DashboardStats";
+import { RecentActivity } from "./components/RecentActivity";
+import { QuickActions } from "./components/QuickActions";
+import { RecentBlogPosts } from "./components/RecentBlogPosts";
+import { RecentGuestbook } from "./components/RecentGuestbook";
 
 export const dynamic = 'force-dynamic';
 
 async function getStats() {
-    const supabase = await createClient();
+  const supabase = await createClient();
 
-    const { count: projectCount } = await supabase.from('projects').select('*', { count: 'exact', head: true });
-    const { count: watchlogCount } = await supabase.from('watchlogs').select('*', { count: 'exact', head: true });
-    const { count: guestbookCount } = await supabase.from('guestbook').select('*', { count: 'exact', head: true });
+  const getCount = async (table: string) => {
+    try {
+      const { count } = await supabase.from(table).select('*', { count: 'exact', head: true });
+      return count || 0;
+    } catch {
+      return 0;
+    }
+  };
 
-    return {
-        projects: projectCount || 0,
-        watchlogs: watchlogCount || 0,
-        guestbook: guestbookCount || 0
-    };
+  const [blogPosts, categories, authors, projects, watchlogs, guestbook] = await Promise.all([
+    getCount('blog_posts'),
+    getCount('blog_categories'),
+    getCount('blog_authors'),
+    getCount('projects'),
+    getCount('watchlogs'),
+    getCount('guestbook'),
+  ]);
+
+  return {
+    blogPosts,
+    categories,
+    authors,
+    projects,
+    watchlogs,
+    guestbook,
+  };
+}
+
+async function getRecentActivity() {
+  let posts: any[] = [];
+  let guestbook: any[] = [];
+  let watchlogs: any[] = [];
+  let projects: any[] = [];
+
+  try {
+    [posts, guestbook, watchlogs, projects] = await Promise.all([
+      getBlogPosts(),
+      getGuestbookEntries(),
+      getWatchlogs(),
+      getProjects(),
+    ]);
+  } catch (error) {
+    console.error('Error fetching activity data:', error);
+  }
+
+  const activities = [
+    ...posts.slice(0, 3).map(post => ({
+      id: post.id,
+      type: 'blog' as const,
+      title: post.title,
+      timestamp: post.publishedAt || new Date().toISOString(),
+      href: `/admin/blog/${post.id}`,
+    })),
+    ...guestbook.slice(0, 2).map((entry: any) => ({
+      id: entry.id,
+      type: 'guestbook' as const,
+      title: `${entry.name}: ${entry.message.substring(0, 50)}...`,
+      timestamp: entry.created_at,
+      href: '/admin/guestbook',
+    })),
+    ...watchlogs.slice(0, 2).map((log: any) => ({
+      id: log.id,
+      type: 'watchlog' as const,
+      title: log.title,
+      timestamp: log.created_at,
+      href: '/admin/watchlogs',
+    })),
+    ...projects.slice(0, 1).map((project: any) => ({
+      id: project.id,
+      type: 'project' as const,
+      title: project.title,
+      timestamp: project.created_at,
+      href: '/admin/projects',
+    })),
+  ];
+
+  // Sort by timestamp descending
+  return activities.sort((a, b) =>
+    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+  ).slice(0, 8);
 }
 
 export default async function AdminOverview() {
-  const stats = await getStats();
+  let recentPosts: any[] = [];
+  let recentGuestbook: any[] = [];
+
+  try {
+    const [posts, entries] = await Promise.all([
+      getBlogPosts(),
+      getGuestbookEntries(),
+    ]);
+    recentPosts = posts.slice(0, 5);
+    recentGuestbook = entries.slice(0, 5);
+  } catch (error) {
+    console.error('Error fetching dashboard data:', error);
+  }
+
+  const [stats, activities] = await Promise.all([
+    getStats(),
+    getRecentActivity(),
+  ]);
 
   return (
     <div className="flex flex-col gap-8">
-        <h1 className="text-3xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">Overview</h1>
+      <div className="flex flex-col gap-2">
+        <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">
+          Dashboard
+        </h1>
+        <p className="text-[var(--color-text-muted)]">
+          Overview of your portfolio content and statistics
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 flex flex-col gap-2 transition-all hover:bg-[var(--color-primary)]/10">
-                <span className="text-sm uppercase tracking-wider opacity-60 font-semibold">Total Projects</span>
-                <span className="text-4xl font-bold text-[var(--color-text-main)]">{stats.projects}</span>
-            </div>
+      {/* Statistics Cards */}
+      <DashboardStats stats={stats} />
 
-            <div className="p-6 rounded-2xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 flex flex-col gap-2 transition-all hover:bg-[var(--color-primary)]/10">
-                <span className="text-sm uppercase tracking-wider opacity-60 font-semibold">Watchlogs</span>
-                <span className="text-4xl font-bold text-[var(--color-text-main)]">{stats.watchlogs}</span>
-            </div>
+      {/* Quick Actions */}
+      <QuickActions />
 
-            <div className="p-6 rounded-2xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 flex flex-col gap-2 transition-all hover:bg-[var(--color-primary)]/10">
-                <span className="text-sm uppercase tracking-wider opacity-60 font-semibold">Guestbook Entries</span>
-                <span className="text-4xl font-bold text-[var(--color-text-main)]">{stats.guestbook}</span>
-            </div>
-        </div>
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Blog Posts */}
+        <RecentBlogPosts posts={recentPosts} />
 
-        <div className="p-8 rounded-2xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10">
-            <h2 className="text-xl font-bold mb-2">Welcome back</h2>
-            <p className="opacity-80 leading-relaxed max-w-2xl">
-                This is your command center. Use the sidebar to manage your portfolio content.
-                You can add new projects, update your watch history, or moderate guestbook entries.
-            </p>
-        </div>
+        {/* Recent Guestbook */}
+        <RecentGuestbook entries={recentGuestbook} />
+      </div>
+
+      {/* Recent Activity */}
+      <RecentActivity activities={activities} />
     </div>
   );
 }

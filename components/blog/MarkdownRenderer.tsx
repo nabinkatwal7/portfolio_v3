@@ -1,9 +1,9 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkGfm from "remark-gfm";
 
 interface MarkdownRendererProps {
   content: string;
@@ -11,11 +11,16 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
   if (!content) {
-    return <div className="text-[var(--color-text-muted)]">No content available.</div>;
+    return (
+      <div className="text-[var(--color-text-muted)]">
+        No content available.
+      </div>
+    );
   }
 
   return (
-    <div className="prose prose-zinc dark:prose-invert mx-auto max-w-none
+    <div
+      className="prose prose-zinc mx-auto max-w-none
       prose-headings:text-[var(--color-text-main)]
       prose-p:text-[var(--color-text-muted)]
       prose-strong:text-[var(--color-text-main)]
@@ -23,7 +28,8 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
       prose-code:text-[var(--color-primary)]
       prose-pre:bg-[var(--color-primary)]/5
       prose-pre:border prose-pre:border-[var(--color-primary)]/10
-      text-lg/8">
+      text-lg/8"
+    >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

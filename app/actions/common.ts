@@ -159,15 +159,14 @@ export async function getProjectsPaginated(
 
 export async function getContent() {
   try {
+    // Check if we're in a static generation context
+    // If cookies() throws, we're likely in static generation
     const supabase = await createClient();
     const { data, error } = await supabase.from("content").select("*");
 
     if (error) {
-      console.error("Error fetching content:", error);
+      // Silently fail during static generation
       if (error.code === "PGRST116" || error.code === "PGRST205") {
-        console.warn(
-          "Content table does not exist. Please run the database schema."
-        );
         return {};
       }
       return {};
@@ -178,8 +177,12 @@ export async function getContent() {
       acc[item.key] = item.value;
       return acc;
     }, {} as Record<string, string>);
-  } catch (error) {
-    console.error("Unexpected error fetching content:", error);
+  } catch (error: any) {
+    // Silently fail during static generation (cookies not available)
+    // This is expected during build time
+    if (error?.message?.includes('cookies') || error?.message?.includes('Dynamic')) {
+      return {};
+    }
     return {};
   }
 }

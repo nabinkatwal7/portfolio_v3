@@ -39,7 +39,7 @@ export function Post(props: NonNullable<any>) {
       )}
 
       {body && (
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        <div className="prose prose-lg max-w-none">
           <MarkdownRenderer content={body} />
         </div>
       )}

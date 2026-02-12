@@ -1,6 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
 
-import { ThemeProvider } from "@/components/theme-provider";
 import {
   SITE_DESCRIPTION,
   SITE_IMAGE,
@@ -20,10 +19,7 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-  ],
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -113,20 +109,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`antialiased relative font-body text-[var(--color-text-main)] background-gradient transition-colors duration-300`}
+        className={`antialiased relative font-body text-[var(--color-text-main)] background-gradient`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Analytics />
-          <Suspense fallback={null}>
-            <DynamicFontProvider />
-          </Suspense>
-          {children}
-        </ThemeProvider>
+        <Analytics />
+        <Suspense fallback={null}>
+          <DynamicFontProvider />
+        </Suspense>
+        {children}
       </body>
     </html>
   );

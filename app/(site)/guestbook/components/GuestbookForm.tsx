@@ -91,7 +91,7 @@ export function GuestbookForm() {
               <div
                 className="cf-turnstile"
                 data-sitekey={turnstileSiteKey}
-                data-theme="auto"
+                data-theme="light"
                 data-size="normal"
               />
             </div>

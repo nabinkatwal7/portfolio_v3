@@ -13,7 +13,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/projects`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/guestbook`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
     { url: `${base}/watchlogs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/playground`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
   ];
 
   const slugs = await getBlogSlugsForSitemap();

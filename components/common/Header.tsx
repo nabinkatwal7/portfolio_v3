@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,7 +16,6 @@ const navigation = [
   { name: "Blog", href: "/blog" },
   { name: "Watchlog", href: "/watchlogs" },
   { name: "Guestbook", href: "/guestbook" },
-  { name: "Playground", href: "/playground" },
 ];
 
 const Header = () => {
@@ -54,8 +52,6 @@ const Header = () => {
                 );
               })}
             </div>
-
-            <ThemeToggle />
           </nav>
         </div>
       </header>
@@ -71,7 +67,6 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-3">
-            <ThemeToggle />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}

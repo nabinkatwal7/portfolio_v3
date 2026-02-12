@@ -40,19 +40,6 @@
   --border: #e5e5e5;
 }
 
-.dark {
-  /* Professional Dark Mode - Senior Dev Aesthetic */
-  --background: #0a0a0a;
-  --background-alt: #171717;
-  --foreground: #fafafa;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --subtle-foreground: #737373;
-  --border: #262626;
-}
-
 .background-gradient {
   background-color: var(--background);
 }

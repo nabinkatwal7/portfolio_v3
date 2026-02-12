@@ -45,7 +45,7 @@ const OrbitRing = ({
         return (
           <motion.div
             key={item.name}
-            className="absolute flex items-center justify-center bg-white dark:bg-[var(--color-primary)]/20 backdrop-blur-xl backdrop-saturate-200 rounded-full shadow-sm p-2 w-10 h-10 sm:w-12 sm:h-12 border border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/25 overflow-hidden"
+            className="absolute flex items-center justify-center bg-white backdrop-blur-xl backdrop-saturate-200 rounded-full shadow-sm p-2 w-10 h-10 sm:w-12 sm:h-12 border border-[var(--color-primary)]/20 overflow-hidden"
             style={{
               left: "50%",
               top: "50%",
@@ -69,7 +69,7 @@ const OrbitRing = ({
                 alt={item.name}
                 width={40}
                 height={40}
-                className="w-full h-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)] dark:drop-shadow-none"
+                className="w-full h-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)]"
               />
             </motion.div>
             {/* Tooltip on hover could go here */}

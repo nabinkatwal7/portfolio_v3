@@ -47,25 +47,25 @@ export const MultiStepLoader = ({
             <motion.div
                animate={{ rotate: 360 }}
                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-               className="absolute w-[400px] h-[400px] border border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/10 rounded-full border-t-[var(--color-primary)]/60 dark:border-t-[var(--color-primary)]/40"
+               className="absolute w-[400px] h-[400px] border border-[var(--color-primary)]/20 rounded-full border-t-[var(--color-primary)]/60"
             />
             <motion.div
                animate={{ rotate: -360 }}
                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-               className="absolute w-[450px] h-[450px] border border-[var(--color-primary)]/15 dark:border-[var(--color-primary)]/5 rounded-full border-b-[var(--color-primary)]/40 dark:border-b-[var(--color-primary)]/20 shadow-[0_0_80px_rgba(var(--color-primary),0.05)]"
+               className="absolute w-[450px] h-[450px] border border-[var(--color-primary)]/15 rounded-full border-b-[var(--color-primary)]/40 shadow-[0_0_80px_rgba(var(--color-primary),0.05)]"
             />
 
             {/* Central Animated Card */}
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="relative z-10 flex flex-col gap-12 items-center justify-center p-16 rounded-[3rem] bg-background border border-[var(--color-primary)]/25 dark:border-[var(--color-primary)]/15 shadow-2xl backdrop-blur-2xl max-w-sm overflow-hidden"
+              className="relative z-10 flex flex-col gap-12 items-center justify-center p-16 rounded-[3rem] bg-background border border-[var(--color-primary)]/25 shadow-2xl backdrop-blur-2xl max-w-sm overflow-hidden"
             >
               {/* Vertical technical scanning effect - Higher contrast for Light Mode */}
               <motion.div
                 animate={{ y: ["-100%", "400%"] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-                className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-[var(--color-primary)]/25 dark:via-[var(--color-primary)]/15 to-transparent pointer-events-none"
+                className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-[var(--color-primary)]/25 to-transparent pointer-events-none"
               />
 
               <div className="flex flex-col items-center justify-center relative">
@@ -80,7 +80,7 @@ export const MultiStepLoader = ({
               </div>
 
               {/* Progress Detail */}
-              <div className="w-72 h-0.5 bg-[var(--color-primary)]/20 dark:bg-[var(--color-primary)]/10 rounded-full overflow-hidden relative">
+              <div className="w-72 h-0.5 bg-[var(--color-primary)]/20 rounded-full overflow-hidden relative">
                 <motion.div
                   initial={{ width: "0%" }}
                   animate={{ width: `${progress}%` }}
@@ -109,7 +109,7 @@ export const MultiStepLoader = ({
             </motion.div>
 
             {/* Powerful Ambient Glows - Boosted for light mode presence */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[500px] h-[500px] bg-[var(--color-primary)]/25 dark:bg-[var(--color-primary)]/15 blur-[150px] rounded-full animate-pulse" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[500px] h-[500px] bg-[var(--color-primary)]/25 blur-[150px] rounded-full animate-pulse" />
           </div>
         </motion.div>
       )}

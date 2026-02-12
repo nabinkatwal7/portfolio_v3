@@ -35,15 +35,16 @@ export const LivePreview = ({ code }: LivePreviewProps) => {
   }, [code]);
 
   return (
-    <div className="h-full w-full rounded-xl overflow-hidden border border-[var(--color-primary)]/10 bg-white shadow-2xl relative">
-       <div className="absolute top-0 left-0 right-0 h-8 bg-[#2d2d2d] flex items-center px-4 border-b border-white/10 z-10">
-          <span className="text-xs text-white/50 font-mono">Live Preview</span>
+    <div className="h-full w-full overflow-hidden border border-[var(--border)] bg-[var(--background)] relative" style={{ minHeight: '600px' }}>
+       <div className="absolute top-0 left-0 right-0 h-8 bg-[var(--background-alt)] flex items-center px-3 border-b border-[var(--border)] z-10">
+          <span className="text-xs text-[var(--color-text-muted)] font-mono">Live Preview</span>
         </div>
       <iframe
         srcDoc={srcDoc}
         title="Live Preview"
         sandbox="allow-scripts"
-        className="w-full h-full pt-8 bg-[#1e1e1e]" // Dark bg by default to match theme, but user can override in CSS
+        className="w-full h-full pt-8 bg-[var(--background)]"
+        style={{ height: 'calc(100% - 32px)' }}
       />
     </div>
   );

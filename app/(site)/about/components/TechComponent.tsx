@@ -10,7 +10,7 @@ const TechComponent = ({ name, image }: { name: string; image: string }) => {
     <motion.div
       key={name}
       variants={floatIn}
-      className="bg-white dark:bg-[var(--color-primary)]/15 backdrop-blur-md backdrop-saturate-200 p-8 sm:p-10 rounded-xl shadow-sm border border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/20 hover:border-[var(--color-primary)]/40 relative flex items-center justify-center transition-all duration-300 group"
+      className="bg-white backdrop-blur-md backdrop-saturate-200 p-8 sm:p-10 rounded-xl shadow-sm border border-[var(--color-primary)]/20 hover:border-[var(--color-primary)]/40 relative flex items-center justify-center transition-all duration-300 group"
       // variants={itemVariants}
       whileHover={{
         scale: 1.05,
@@ -26,7 +26,7 @@ const TechComponent = ({ name, image }: { name: string; image: string }) => {
           src={image}
           width={158}
           height={48}
-          className="max-h-12 w-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)] dark:drop-shadow-none"
+          className="max-h-12 w-full object-contain z-10 drop-shadow-[0_0_1px_rgba(0,0,0,0.1)]"
         />
       )}
     </motion.div>

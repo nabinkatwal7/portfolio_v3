@@ -1,10 +1,22 @@
-import { GuestbookForm } from '@/app/(site)/guestbook/components/GuestbookForm';
-import { getGuestbookEntries } from '@/app/actions/common';
-import { AuroraBackground } from '@/components/common/animation/AuroraBackground';
-import CTA from '@/components/home/CTA';
+import { GuestbookForm } from "@/app/(site)/guestbook/components/GuestbookForm";
+import { getGuestbookEntries } from "@/app/actions/common";
+import { AuroraBackground } from "@/components/common/animation/AuroraBackground";
+import CTA from "@/components/home/CTA";
+import type { Metadata } from "next";
 
-// Force dynamic rendering to ensure fresh data
-export const dynamic = 'force-dynamic';
+// Revalidate every 30 seconds for guestbook (frequent updates)
+export const revalidate = 30;
+
+export const metadata: Metadata = {
+  title: "Guestbook",
+  description:
+    "Leave a message in the guestbook — say hello, drop a suggestion, or let me know you were here.",
+  openGraph: {
+    title: "Guestbook | Nabin Katwal",
+    description:
+      "Leave a message in the guestbook — say hello, drop a suggestion, or let me know you were here.",
+  },
+};
 
 export default async function GuestbookPage() {
   const entries = await getGuestbookEntries();

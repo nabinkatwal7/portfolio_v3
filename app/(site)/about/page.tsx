@@ -6,6 +6,18 @@ import Story from "@/app/(site)/about/components/Story";
 import Summary from "@/app/(site)/about/components/Summary";
 import TechStack from "@/app/(site)/about/components/TechStack";
 import CTA from "@/components/home/CTA";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about Nabin Katwal — background, experience, tech stack, education, and interests.",
+  openGraph: {
+    title: "About | Nabin Katwal",
+    description:
+      "Learn about Nabin Katwal — background, experience, tech stack, education, and interests.",
+  },
+};
 
 function Page() {
   return (

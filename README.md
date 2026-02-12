@@ -19,6 +19,7 @@ following documents:
 
 - [**Full Documentation**](./DOCUMENTATION.md) - Overview of the project, features, and structure.
 - [**Database Setup Guide**](./DATABASE_SETUP.md) - Instructions for setting up Supabase and the database schema.
+- [**Security & Performance Guide**](./SECURITY.md) - Security headers, input validation, rate limiting, and performance optimizations.
 
 ## ✨ Features
 
@@ -27,6 +28,8 @@ following documents:
 - **Admin Panel:** Complete dashboard to manage all content.
 - **Code Playground:** Test and share code snippets live.
 - **Animations:** Smooth transitions and interactive backgrounds with Motion.
+- **Security:** Comprehensive security headers, input validation, and rate limiting.
+- **Performance:** Optimized rendering, image optimization, and ISR (Incremental Static Regeneration).
 
 ## 🛠️ Tech Stack
 

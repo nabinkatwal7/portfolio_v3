@@ -33,7 +33,9 @@ export function Post(props: NonNullable<any>) {
             height={600}
             alt={mainImageAlt || title}
             className="w-full h-auto object-cover"
-            unoptimized
+            priority
+            loading="eager"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
           />
         </figure>
       )}

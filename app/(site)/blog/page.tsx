@@ -5,8 +5,21 @@ import CTA from "@/components/home/CTA";
 import { getBlogPostsPaginated } from "@/app/actions/common";
 import { slideUp, staggerContainer } from "@/utils/motion-variants";
 import { Pagination } from "@/components/common/Pagination";
+import type { Metadata } from "next";
 
-export const dynamic = 'force-dynamic';
+// Revalidate every 5 minutes for blog listing
+export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Engineering and design blog — thoughts on development, design, and tech.",
+  openGraph: {
+    title: "Blog | Nabin Katwal",
+    description:
+      "Engineering and design blog — thoughts on development, design, and tech.",
+  },
+};
 
 const Page = async ({ searchParams }: { searchParams: Promise<{ page?: string }> }) => {
   const params = await searchParams;

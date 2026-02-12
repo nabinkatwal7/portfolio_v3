@@ -328,6 +328,33 @@ export async function getBlogPostsPaginated(
   }
 }
 
+/** Lightweight fetch for sitemap: slug + lastmod only. */
+export async function getBlogSlugsForSitemap(): Promise<
+  { slug: string; updated_at: string }[]
+> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("slug, updated_at")
+      .not("published_at", "is", null)
+      .order("updated_at", { ascending: false });
+
+    if (error) {
+      if (error.code === "PGRST116" || error.code === "PGRST205") return [];
+      console.error("Error fetching blog slugs for sitemap:", error);
+      return [];
+    }
+    return (data || []).map((row) => ({
+      slug: row.slug,
+      updated_at: row.updated_at ?? new Date().toISOString(),
+    }));
+  } catch (error) {
+    console.error("Error in getBlogSlugsForSitemap:", error);
+    return [];
+  }
+}
+
 export async function getBlogPostBySlug(slug: string) {
   try {
     const supabase = await createClient();

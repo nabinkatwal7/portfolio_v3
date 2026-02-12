@@ -1,57 +1,83 @@
-'use server'
+"use server";
 
-import { createServiceRoleClient } from '@/utils/supabase/server'
-import { revalidatePath } from 'next/cache'
-import { checkAuth } from './auth'
+import { createServiceRoleClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
+import { checkAuth } from "./auth";
+import { validateSlug, sanitizeString, validateUrl } from "@/lib/validation";
 
 // Helper to ensure admin access
 async function requireAdmin() {
-  const isAuth = await checkAuth()
+  const isAuth = await checkAuth();
   if (!isAuth) {
-    throw new Error('Unauthorized')
+    throw new Error("Unauthorized");
   }
 }
 
 // Blog Posts Actions
 export async function createBlogPost(formData: FormData) {
-  await requireAdmin()
-  const supabase = createServiceRoleClient()
+  await requireAdmin();
+  const supabase = createServiceRoleClient();
 
-  const title = formData.get('title') as string
-  const slug = formData.get('slug') as string
-  const body = formData.get('body') as string
-  const mainImage = formData.get('mainImage') as string
-  const mainImageAlt = formData.get('mainImageAlt') as string
-  const authorId = formData.get('authorId') as string
-  const publishedAt = formData.get('publishedAt') as string
-  const categoryIds = formData.get('categoryIds') as string
+  const titleInput = formData.get("title");
+  const slugInput = formData.get("slug");
+  const bodyInput = formData.get("body");
+  const mainImageInput = formData.get("mainImage");
+  const mainImageAltInput = formData.get("mainImageAlt");
+  const authorId = formData.get("authorId") as string;
+  const publishedAt = formData.get("publishedAt") as string;
+  const categoryIds = formData.get("categoryIds") as string;
 
-  if (!title || !slug || !body) {
-    throw new Error('Title, slug, and body are required')
+  // Validate title
+  if (!titleInput || typeof titleInput !== "string" || !titleInput.trim()) {
+    throw new Error("Title is required");
+  }
+  const title = sanitizeString(titleInput, 200);
+
+  // Validate slug
+  const slugValidation = validateSlug(slugInput);
+  if (!slugValidation.valid) {
+    throw new Error(slugValidation.error || "Invalid slug");
+  }
+  const slug = slugValidation.value!;
+
+  // Validate body
+  if (!bodyInput || typeof bodyInput !== "string" || !bodyInput.trim()) {
+    throw new Error("Body is required");
+  }
+  const body = sanitizeString(bodyInput, 50000); // Max 50KB for blog post
+
+  // Validate main image URL if provided
+  let mainImage: string | null = null;
+  if (mainImageInput && typeof mainImageInput === "string" && mainImageInput.trim()) {
+    const urlValidation = validateUrl(mainImageInput.trim());
+    if (!urlValidation.valid) {
+      // Allow relative paths
+      if (!mainImageInput.startsWith("/") && !mainImageInput.startsWith("./")) {
+        throw new Error(urlValidation.error || "Invalid image URL");
+      }
+      mainImage = mainImageInput.trim();
+    } else {
+      mainImage = urlValidation.value!;
+    }
   }
 
-  if (!body.trim()) {
-    throw new Error('Body cannot be empty')
-  }
-
-  // Validate slug format
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-    throw new Error('Slug must contain only lowercase letters, numbers, and hyphens')
-  }
+  const mainImageAlt = mainImageAltInput
+    ? sanitizeString(mainImageAltInput, 200)
+    : null;
 
   const { data: post, error: postError } = await supabase
-    .from('blog_posts')
+    .from("blog_posts")
     .insert({
-      title: title.trim(),
-      slug: slug.trim(),
-      body: body.trim(),
-      main_image: mainImage?.trim() || null,
-      main_image_alt: mainImageAlt?.trim() || null,
+      title,
+      slug,
+      body,
+      main_image: mainImage,
+      main_image_alt: mainImageAlt,
       author_id: authorId || null,
       published_at: publishedAt || null,
     })
     .select()
-    .single()
+    .single();
 
   if (postError) {
     console.error('Error creating blog post:', postError)

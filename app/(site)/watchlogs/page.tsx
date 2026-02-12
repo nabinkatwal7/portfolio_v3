@@ -3,8 +3,21 @@ import LibraryContent from "@/app/(site)/watchlogs/components/Shows";
 import { getWatchlogsPaginated } from "@/app/actions/common";
 import { Pagination } from "@/components/common/Pagination";
 import CTA from "@/components/home/CTA";
+import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+// Revalidate every hour for watchlogs
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Watchlogs",
+  description:
+    "Shows and books I've watched and read — TV, anime, movies, and reading list.",
+  openGraph: {
+    title: "Watchlogs | Nabin Katwal",
+    description:
+      "Shows and books I've watched and read — TV, anime, movies, and reading list.",
+  },
+};
 
 const Page = async ({
   searchParams,

@@ -4,7 +4,8 @@ import Description from "@/components/home/Description";
 import Hero from "@/components/home/Hero";
 import Statistics from "@/components/home/Statistics";
 
-export const dynamic = 'force-dynamic';
+// Revalidate every hour for fresh content
+export const revalidate = 3600;
 
 export default async function Home() {
   const content = await getContent();

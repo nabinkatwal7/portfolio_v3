@@ -1,22 +1,42 @@
-'use server'
+"use server";
 
-import { createClient } from '@/utils/supabase/server'
-import { revalidatePath } from 'next/cache'
+import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
+import { validateName, validateMessage, checkRateLimit, getClientIp } from "@/lib/validation";
+import { headers } from "next/headers";
 
 export async function addGuestbookEntry(formData: FormData) {
   try {
-    const supabase = await createClient()
-    const name = formData.get('name') as string
-    const message = formData.get('message') as string
-
-    if (!name || !message) {
-      return { error: 'Name and message are required' }
+    // Rate limiting
+    const headersList = await headers();
+    const clientIp = getClientIp(headersList);
+    const rateLimit = checkRateLimit(`guestbook:${clientIp}`, 5, 60000); // 5 requests per minute
+    
+    if (!rateLimit.allowed) {
+      return {
+        error: `Too many requests. Please try again after ${Math.ceil((rateLimit.resetAt - Date.now()) / 1000)} seconds.`,
+      };
     }
 
-    const { error } = await supabase.from('guestbook').insert({
-      name: name.trim(),
-      message: message.trim(),
-    })
+    // Validation
+    const nameInput = formData.get("name");
+    const messageInput = formData.get("message");
+
+    const nameValidation = validateName(nameInput);
+    if (!nameValidation.valid) {
+      return { error: nameValidation.error };
+    }
+
+    const messageValidation = validateMessage(messageInput, 2000);
+    if (!messageValidation.valid) {
+      return { error: messageValidation.error };
+    }
+
+    const supabase = await createClient();
+    const { error } = await supabase.from("guestbook").insert({
+      name: nameValidation.value,
+      message: messageValidation.value,
+    });
 
     if (error) {
       console.error('Error adding guestbook entry:', error)

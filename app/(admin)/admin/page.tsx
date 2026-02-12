@@ -114,32 +114,24 @@ export default async function AdminOverview() {
   ]);
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">
+    <div className="flex flex-col gap-8 max-w-6xl">
+      <div className="flex flex-col gap-1">
+        <h1 className="text-2xl font-medium text-[var(--color-text-main)]">
           Dashboard
         </h1>
-        <p className="text-[var(--color-text-muted)]">
+        <p className="text-sm text-[var(--color-text-muted)]">
           Overview of your portfolio content and statistics
         </p>
       </div>
 
-      {/* Statistics Cards */}
       <DashboardStats stats={stats} />
-
-      {/* Quick Actions */}
       <QuickActions />
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Blog Posts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <RecentBlogPosts posts={recentPosts} />
-
-        {/* Recent Guestbook */}
         <RecentGuestbook entries={recentGuestbook} />
       </div>
 
-      {/* Recent Activity */}
       <RecentActivity activities={activities} />
     </div>
   );

@@ -11,18 +11,14 @@ export default async function Home() {
   const content = await getContent();
 
   return (
-    <div className="flex flex-col relative min-h-screen">
+    <>
       <Hero
         title={content['hero_title']}
         bio={content['hero_bio']}
       />
-      <div className="bg-alternate py-10">
-        <Description />
-      </div>
+      <Description />
       <Statistics />
-      <div className="bg-alternate py-10">
-        <CTA />
-      </div>
-    </div>
+      <CTA />
+    </>
   );
 }

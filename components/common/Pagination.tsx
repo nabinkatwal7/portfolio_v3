@@ -44,18 +44,18 @@ export function Pagination({ currentPage, totalPages, basePath, searchParams = {
   }
 
   return (
-    <nav className="flex items-center justify-center gap-2 mt-8" aria-label="Pagination">
+    <nav className="flex items-center justify-center gap-2" aria-label="Pagination">
       {/* Previous Button */}
       {currentPage > 1 ? (
         <Link
           href={createUrl(currentPage - 1)}
-          className="flex items-center gap-1 px-4 py-2 rounded-lg border border-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/20 transition-colors text-[var(--color-text-main)]"
+          className="flex items-center gap-1 px-3 py-2 border border-[var(--border)] hover:bg-[var(--background-alt)] transition-colors text-sm text-[var(--color-text-main)]"
         >
           <HiChevronLeft className="w-4 h-4" />
           <span className="hidden sm:inline">Previous</span>
         </Link>
       ) : (
-        <div className="flex items-center gap-1 px-4 py-2 rounded-lg border border-[var(--color-primary)]/10 opacity-50 cursor-not-allowed text-[var(--color-text-muted)]">
+        <div className="flex items-center gap-1 px-3 py-2 border border-[var(--border)] opacity-50 cursor-not-allowed text-sm text-[var(--color-text-muted)]">
           <HiChevronLeft className="w-4 h-4" />
           <span className="hidden sm:inline">Previous</span>
         </div>
@@ -66,12 +66,12 @@ export function Pagination({ currentPage, totalPages, basePath, searchParams = {
         <>
           <Link
             href={createUrl(1)}
-            className="px-3 py-2 rounded-lg border border-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/20 transition-colors text-[var(--color-text-main)]"
+            className="px-3 py-2 border border-[var(--border)] hover:bg-[var(--background-alt)] transition-colors text-sm text-[var(--color-text-main)]"
           >
             1
           </Link>
           {startPage > 2 && (
-            <span className="px-2 text-[var(--color-text-muted)]">...</span>
+            <span className="px-2 text-sm text-[var(--color-text-subtle)]">...</span>
           )}
         </>
       )}
@@ -81,10 +81,10 @@ export function Pagination({ currentPage, totalPages, basePath, searchParams = {
         <Link
           key={page}
           href={createUrl(page)}
-          className={`px-3 py-2 rounded-lg border transition-colors ${
+          className={`px-3 py-2 border transition-colors text-sm ${
             page === currentPage
-              ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)]"
-              : "border-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/20 text-[var(--color-text-main)]"
+              ? "bg-[var(--color-primary)] text-[var(--primary-foreground)] border-[var(--color-primary)]"
+              : "border-[var(--border)] hover:bg-[var(--background-alt)] text-[var(--color-text-main)]"
           }`}
         >
           {page}
@@ -95,11 +95,11 @@ export function Pagination({ currentPage, totalPages, basePath, searchParams = {
       {endPage < totalPages && (
         <>
           {endPage < totalPages - 1 && (
-            <span className="px-2 text-[var(--color-text-muted)]">...</span>
+            <span className="px-2 text-sm text-[var(--color-text-subtle)]">...</span>
           )}
           <Link
             href={createUrl(totalPages)}
-            className="px-3 py-2 rounded-lg border border-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/20 transition-colors text-[var(--color-text-main)]"
+            className="px-3 py-2 border border-[var(--border)] hover:bg-[var(--background-alt)] transition-colors text-sm text-[var(--color-text-main)]"
           >
             {totalPages}
           </Link>
@@ -110,13 +110,13 @@ export function Pagination({ currentPage, totalPages, basePath, searchParams = {
       {currentPage < totalPages ? (
         <Link
           href={createUrl(currentPage + 1)}
-          className="flex items-center gap-1 px-4 py-2 rounded-lg border border-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/20 transition-colors text-[var(--color-text-main)]"
+          className="flex items-center gap-1 px-3 py-2 border border-[var(--border)] hover:bg-[var(--background-alt)] transition-colors text-sm text-[var(--color-text-main)]"
         >
           <span className="hidden sm:inline">Next</span>
           <HiChevronRight className="w-4 h-4" />
         </Link>
       ) : (
-        <div className="flex items-center gap-1 px-4 py-2 rounded-lg border border-[var(--color-primary)]/10 opacity-50 cursor-not-allowed text-[var(--color-text-muted)]">
+        <div className="flex items-center gap-1 px-3 py-2 border border-[var(--border)] opacity-50 cursor-not-allowed text-sm text-[var(--color-text-muted)]">
           <span className="hidden sm:inline">Next</span>
           <HiChevronRight className="w-4 h-4" />
         </div>

@@ -9,7 +9,7 @@ export default async function AdminSettings() {
   return (
     <div className="flex flex-col gap-10 max-w-4xl">
         <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">Settings & Content</h1>
+          <h1 className="text-4xl font-bold  text-[var(--color-primary)]">Settings & Content</h1>
           <p className="text-[var(--color-text-muted)]">Manage your site content and system settings</p>
         </div>
 

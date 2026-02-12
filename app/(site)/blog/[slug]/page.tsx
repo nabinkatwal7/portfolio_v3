@@ -1,5 +1,4 @@
 import { Post } from "@/components/blog/Post";
-import CommonWrapper from "@/components/common/animation/CommonWrapper";
 import CTA from "@/components/home/CTA";
 import { getBlogPostBySlug } from "@/app/actions/common";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -74,17 +73,15 @@ export default async function Page({ params }: Props) {
   };
 
   return (
-    <div className="flex flex-col relative min-h-screen">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <CommonWrapper className="grid grid-cols-1 gap-6 common-layout w-full">
+      <section className="section-padding">
         <Post {...post} />
-      </CommonWrapper>
-      <div className="bg-alternate py-10">
-        <CTA />
-      </div>
-    </div>
+      </section>
+      <CTA />
+    </>
   );
 }

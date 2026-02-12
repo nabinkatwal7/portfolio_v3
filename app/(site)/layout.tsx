@@ -1,5 +1,3 @@
-import Overlay from "@/components/common/animation/Overlay";
-import { PageTransition } from "@/components/common/animation/PageTransition";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
@@ -14,13 +12,12 @@ export default function SiteLayout({
 }>) {
   return (
     <ErrorBoundary>
-      <Overlay />
       <Header />
-      <PageTransition>
+      <main>
         <Suspense fallback={<LoadingFallback />}>
           {children}
         </Suspense>
-      </PageTransition>
+      </main>
       <Footer />
     </ErrorBoundary>
   );

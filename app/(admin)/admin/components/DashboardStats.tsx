@@ -6,34 +6,17 @@ interface StatCardProps {
   value: number | string;
   icon: React.ComponentType<{ className?: string }>;
   href?: string;
-  trend?: {
-    value: number;
-    isPositive: boolean;
-  };
 }
 
-function StatCard({ title, value, icon: Icon, href, trend }: StatCardProps) {
+function StatCard({ title, value, icon: Icon, href }: StatCardProps) {
   const content = (
-    <div className="p-6 rounded-xl bg-gradient-to-br from-[var(--color-primary)]/10 via-[var(--color-primary)]/5 to-transparent border border-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/20 transition-all group">
-      <div className="flex items-start justify-between mb-4">
-        <div className="p-3 rounded-lg bg-[var(--color-primary)]/10 group-hover:bg-[var(--color-primary)]/20 transition-colors">
-          <Icon className="w-6 h-6 text-[var(--color-primary)]" />
+    <div className="p-4 border-b border-[var(--border)] hover:bg-[var(--background-alt)] transition-colors">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Icon className="w-4 h-4 text-[var(--color-text-muted)]" />
+          <span className="text-sm text-[var(--color-text-muted)]">{title}</span>
         </div>
-        {trend && (
-          <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
-            trend.isPositive
-              ? 'bg-green-500/20 text-green-400'
-              : 'bg-red-500/20 text-red-400'
-          }`}>
-            {trend.isPositive ? '+' : ''}{trend.value}%
-          </span>
-        )}
-      </div>
-      <div className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wider">
-          {title}
-        </span>
-        <span className="text-4xl font-bold text-[var(--color-text-main)]">
+        <span className="text-lg font-medium text-[var(--color-text-main)]">
           {value}
         </span>
       </div>
@@ -64,7 +47,7 @@ interface DashboardStatsProps {
 
 export function DashboardStats({ stats }: DashboardStatsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="border border-[var(--border)]">
       <StatCard
         title="Blog Posts"
         value={stats.blogPosts}

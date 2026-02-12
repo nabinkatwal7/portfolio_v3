@@ -20,10 +20,10 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 bg-alternate border-r border-[var(--color-primary)]/10 h-screen flex flex-col sticky top-0">
-      <div className="p-6 border-b border-[var(--color-primary)]/10 flex items-center gap-2">
-        <Link href="/" className="font-bold text-xl tracking-tight text-[var(--color-primary)]">
-           Admin Panel
+    <div className="w-56 bg-[var(--background-alt)] border-r border-[var(--border)] h-screen flex flex-col sticky top-0">
+      <div className="p-6 border-b border-[var(--border)]">
+        <Link href="/" className="text-sm font-medium text-[var(--color-text-main)]">
+          Admin
         </Link>
       </div>
 
@@ -34,29 +34,29 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-colors ${
                    isActive
-                   ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-medium'
-                   : 'text-[var(--color-text-muted)] hover:bg-[var(--color-primary)]/5 hover:text-[var(--color-text-main)]'
+                   ? 'text-[var(--color-text-main)]'
+                   : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-main)]'
                 }`}
               >
-                 <item.icon className="w-5 h-5" />
+                 <item.icon className="w-4 h-4" />
                  {item.name}
               </Link>
            )
         })}
       </nav>
 
-      <div className="p-4 border-t border-[var(--color-primary)]/10 flex flex-col gap-2">
+      <div className="p-4 border-t border-[var(--border)] flex flex-col gap-1">
          <button
             onClick={() => logout()}
-            className="flex items-center gap-3 px-4 py-3 text-red-400 hover:text-red-500 hover:bg-red-500/5 rounded-xl transition-all w-full text-left"
+            className="flex items-center gap-3 px-3 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors w-full text-left"
          >
-            <HiArrowRightOnRectangle className="w-5 h-5" />
+            <HiArrowRightOnRectangle className="w-4 h-4" />
             Logout
          </button>
-         <Link href="/" className="flex items-center gap-3 px-4 py-3 text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] hover:bg-[var(--color-primary)]/5 rounded-xl transition-all">
-            <HiArrowLeft className="w-5 h-5" />
+         <Link href="/" className="flex items-center gap-3 px-3 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors">
+            <HiArrowLeft className="w-4 h-4" />
             Back to Site
          </Link>
       </div>

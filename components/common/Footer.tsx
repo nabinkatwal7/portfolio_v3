@@ -1,6 +1,3 @@
-"use client";
-import { slideUp, staggerContainer } from "@/utils/motion-variants";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
     FaGithub,
@@ -37,58 +34,46 @@ const navigation = {
 
 const Footer = () => {
   return (
-    <footer className="py-12 border-t border-[var(--color-primary)]/10">
-      <motion.div
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, amount: 0.1 }}
-        className="common-layout max-w-7xl"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Brand */}
-          <motion.div variants={slideUp} className="flex flex-col items-center md:items-start">
-            <Link href="/" className="text-3xl font-[var(--font-Logo)] font-bold text-[var(--color-primary)] hover:opacity-80 transition-opacity mb-2">
+    <footer className="border-t border-[var(--border)] bg-alternate">
+      <div className="container-max common-layout py-12">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-8">
+          <div>
+            <Link href="/" className="text-xs font-normal text-[var(--color-text-main)] tracking-wide uppercase mb-2 block">
               Nabin Katwal
             </Link>
-            <p className="text-sm text-[var(--color-text-main)]/50 dark:text-[var(--color-text-main)]/30">
-              © {new Date().getFullYear()} Built with passion.
+            <p className="text-xs text-[var(--color-text-subtle)]">
+              © {new Date().getFullYear()}
             </p>
-          </motion.div>
+          </div>
 
-          {/* Navigation */}
-          <motion.nav
-            variants={slideUp}
-            aria-label="Footer"
-            className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm"
-          >
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
             {navigation.main.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="hover:text-[var(--color-primary)] text-[var(--color-text-main)]/80 dark:text-[var(--color-text-main)]/60 transition-colors duration-300"
+                className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
               >
                 {item.name}
               </Link>
             ))}
-          </motion.nav>
+          </nav>
 
-          {/* Social Links */}
-          <motion.div variants={slideUp} className="flex justify-center gap-x-6">
+          <div className="flex gap-4">
             {navigation.social.map((item) => (
               <Link
                 target="_blank"
+                rel="noopener noreferrer"
                 key={item.name}
                 href={item.href}
-                className="text-xl hover:text-[var(--color-primary)] text-[var(--color-text-main)]/70 dark:text-[var(--color-text-main)]/40 hover:scale-110 transition-all duration-300"
+                className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+                aria-label={item.name}
               >
-                <span className="sr-only">{item.name}</span>
                 {item.icon}
               </Link>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HiNewspaper, HiUserCircle, HiFilm, HiRectangleStack, HiClock } from "react-icons/hi2";
+import { HiNewspaper, HiUserCircle, HiFilm, HiRectangleStack } from "react-icons/hi2";
 import { formatDistanceToNow } from "date-fns";
 
 interface ActivityItem {
@@ -24,19 +24,18 @@ const typeConfig = {
 export function RecentActivity({ activities }: RecentActivityProps) {
   if (activities.length === 0) {
     return (
-      <div className="p-8 rounded-xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 text-center">
-        <HiClock className="w-12 h-12 mx-auto mb-4 text-[var(--color-text-muted)] opacity-50" />
-        <p className="text-[var(--color-text-muted)]">No recent activity</p>
+      <div className="border border-[var(--border)] p-8 text-center">
+        <p className="text-sm text-[var(--color-text-muted)]">No recent activity</p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 overflow-hidden">
-      <div className="p-6 border-b border-[var(--color-primary)]/10">
-        <h3 className="text-lg font-semibold text-[var(--color-text-main)]">Recent Activity</h3>
+    <div className="border border-[var(--border)]">
+      <div className="px-4 py-3 border-b border-[var(--border)]">
+        <h3 className="text-sm font-medium text-[var(--color-text-main)]">Recent Activity</h3>
       </div>
-      <div className="divide-y divide-[var(--color-primary)]/10">
+      <div>
         {activities.map((activity) => {
           const config = typeConfig[activity.type];
           const Icon = config.icon;
@@ -46,17 +45,15 @@ export function RecentActivity({ activities }: RecentActivityProps) {
             <Link
               key={activity.id}
               href={activity.href}
-              className="block p-4 hover:bg-[var(--color-primary)]/5 transition-colors group"
+              className="block px-4 py-3 border-b border-[var(--border)] last:border-b-0 hover:bg-[var(--background-alt)] transition-colors"
             >
-              <div className="flex items-start gap-4">
-                <div className={`p-2 rounded-lg ${config.bg} flex-shrink-0`}>
-                  <Icon className={`w-5 h-5 ${config.color}`} />
-                </div>
+              <div className="flex items-start gap-3">
+                <Icon className="w-4 h-4 text-[var(--color-text-muted)] mt-0.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-[var(--color-text-main)] group-hover:text-[var(--color-primary)] transition-colors truncate">
+                  <p className="text-sm text-[var(--color-text-main)] truncate">
                     {activity.title}
                   </p>
-                  <p className="text-xs text-[var(--color-text-muted)] mt-1">
+                  <p className="text-xs text-[var(--color-text-subtle)] mt-0.5">
                     {timeAgo}
                   </p>
                 </div>

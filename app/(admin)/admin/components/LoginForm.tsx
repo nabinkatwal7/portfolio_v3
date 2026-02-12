@@ -18,20 +18,20 @@ export default function LoginForm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-sm flex flex-col gap-6 p-8 rounded-2xl bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 backdrop-blur-md">
-        <h1 className="text-2xl font-bold text-center">Admin Access</h1>
+      <div className="w-full max-w-sm flex flex-col gap-6">
+        <h1 className="text-xl font-medium text-center text-[var(--color-text-main)]">Admin Access</h1>
         <form action={handleSubmit} className="flex flex-col gap-4">
           <input
             type="password"
             name="password"
             placeholder="Enter password"
             required
-            className="px-4 py-3 rounded-xl bg-background/50 border border-white/10 focus:border-[var(--color-primary)] outline-none"
+            className="px-4 py-2.5 border border-[var(--border)] bg-[var(--background)] focus:outline-none focus:border-[var(--color-text-main)] text-sm"
           />
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && <p className="text-sm text-red-500 text-center">{error}</p>}
           <button
             type="submit"
-            className="px-4 py-3 rounded-full bg-[var(--color-primary)] text-white hover:opacity-90 transition-opacity"
+            className="px-4 py-2.5 bg-[var(--color-primary)] text-[var(--primary-foreground)] text-sm font-medium hover:opacity-80 transition-opacity"
           >
             Login
           </button>

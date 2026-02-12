@@ -1,51 +1,43 @@
-"use client";
 import { Author } from "@/components/blog/Author";
 import { Categories } from "@/components/blog/Categories";
 import { PublishedAt } from "@/components/blog/PublishedAt";
-import { slideInUp } from "@/utils/motion-variants";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
 
 export function PostCard(props: any) {
   const { title, author, mainImage, mainImageAlt, publishedAt, categories, slug } = props;
 
   return (
-    <motion.div variants={slideInUp} whileHover="hover" className="h-full">
-      <Link
-        className="group block h-full"
-        href={`/blog/${slug}`}
-      >
-        <article className="h-full bg-[var(--color-primary)]/5 backdrop-blur-md rounded-2xl shadow-sm border border-[var(--color-primary)]/10 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:border-[var(--color-primary)]/30">
-          {mainImage && (
-            <div className="w-full h-64 overflow-hidden relative">
-              <Image
-                src={mainImage}
-                width={600}
-                height={400}
-                alt={mainImageAlt || title || ""}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
-          )}
-          <div className="p-8 flex flex-col gap-6">
+    <Link href={`/blog/${slug}`} className="block h-full">
+      <article className="h-full border-b border-[var(--border)] pb-8 hover:opacity-70 transition-opacity">
+        {mainImage && (
+          <div className="w-full h-48 mb-4 overflow-hidden bg-[var(--muted)]">
+            <Image
+              src={mainImage}
+              width={600}
+              height={400}
+              alt={mainImageAlt || title || ""}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+            />
+          </div>
+        )}
+        <div className="flex flex-col gap-3">
+          {categories && categories.length > 0 && (
             <div className="flex flex-wrap gap-2">
               <Categories categories={categories} />
             </div>
-            <h2 className="heading-card group-hover:text-[var(--color-primary)] transition-colors duration-300 leading-tight">
-              {title}
-            </h2>
-            <div className="flex justify-between items-center text-[var(--color-small)] opacity-60 mt-auto pt-6 border-t border-[var(--color-primary)]/10">
-              <Author author={author} />
-              <PublishedAt publishedAt={publishedAt} />
-            </div>
+          )}
+          <h2 className="heading-card line-clamp-2">
+            {title}
+          </h2>
+          <div className="flex justify-between items-center text-small text-[var(--color-text-muted)]">
+            <Author author={author} />
+            <PublishedAt publishedAt={publishedAt} />
           </div>
-        </article>
-      </Link>
-    </motion.div>
+        </div>
+      </article>
+    </Link>
   );
 }

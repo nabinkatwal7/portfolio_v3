@@ -25,20 +25,22 @@ async function Page({ searchParams }: { searchParams: Promise<{ page?: string }>
   const { data: projects, totalPages } = await getProjectsPaginated(currentPage, 12);
 
   return (
-    <div className="flex flex-col relative min-h-screen">
+    <>
       <Hero />
-      <div className="bg-alternate py-12">
-        <div className="common-layout max-w-[1350px]">
+      <section className="section-padding bg-alternate border-t border-[var(--border)]">
+        <div className="container-max common-layout">
           <ProjectListing projects={projects} />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            basePath="/projects"
-          />
+          <div className="mt-12">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              basePath="/projects"
+            />
+          </div>
         </div>
-      </div>
+      </section>
       <CTA />
-    </div>
+    </>
   );
 }
 

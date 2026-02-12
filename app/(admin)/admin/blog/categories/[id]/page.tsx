@@ -11,7 +11,7 @@ export default async function EditCategoryPage({ params }: { params: Promise<{ i
   if (!category) {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">
+        <h1 className="text-4xl font-bold  text-[var(--color-primary)]">
           Category Not Found
         </h1>
         <p className="text-[var(--color-text-muted)]">
@@ -24,7 +24,7 @@ export default async function EditCategoryPage({ params }: { params: Promise<{ i
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">
+        <h1 className="text-4xl font-bold  text-[var(--color-primary)]">
           Edit Category
         </h1>
         <p className="text-[var(--color-text-muted)]">

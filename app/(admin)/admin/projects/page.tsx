@@ -13,7 +13,7 @@ export default async function AdminProjects({ searchParams }: { searchParams: Pr
   return (
     <div className="flex flex-col gap-10">
         <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">Projects</h1>
+          <h1 className="text-4xl font-bold text-[var(--color-primary)]">Projects</h1>
           <p className="text-[var(--color-text-muted)]">Manage your project portfolio</p>
         </div>
 

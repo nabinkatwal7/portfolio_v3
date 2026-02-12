@@ -134,7 +134,7 @@ export default function PlaygroundPage() {
         {/* Header Controls */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-[var(--color-primary)]/5 p-4 rounded-2xl border border-[var(--color-primary)]/10 backdrop-blur-sm">
           <div className="flex items-center gap-4">
-            <h1 className="text-2xl  font-[var(--font-syne)] text-[var(--color-primary)]">
+            <h1 className="text-2xl   text-[var(--color-primary)]">
               Playground
             </h1>
             <div className="h-8 w-px bg-[var(--color-primary)]/20 hidden md:block" />

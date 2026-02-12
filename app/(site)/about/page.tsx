@@ -21,24 +21,28 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className="flex flex-col relative min-h-screen">
+    <>
       <Hero />
-      <div className="bg-alternate py-10">
+      <section className="section-padding bg-alternate border-t border-subtle">
         <Story />
-      </div>
-      <TechStack />
-      <div className="bg-alternate py-10">
+      </section>
+      <section className="section-padding">
+        <TechStack />
+      </section>
+      <section className="section-padding bg-alternate border-t border-subtle">
         <Experience />
-      </div>
-      <Summary />
-      <div className="bg-alternate py-10">
+      </section>
+      <section className="section-padding">
+        <Summary />
+      </section>
+      <section className="section-padding bg-alternate border-t border-subtle">
         <Education />
-      </div>
-      <Hobbies />
-      <div className="bg-alternate/50 py-10">
-        <CTA />
-      </div>
-    </div>
+      </section>
+      <section className="section-padding">
+        <Hobbies />
+      </section>
+      <CTA />
+    </>
   );
 }
 

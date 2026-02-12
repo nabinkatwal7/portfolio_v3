@@ -29,22 +29,22 @@ const Page = async ({
   const { data, totalPages } = await getWatchlogsPaginated(currentPage, 20);
 
   return (
-    <div className="flex flex-col relative min-h-screen">
+    <>
       <Hero />
-      <div className="bg-alternate py-20">
-        <div className="common-layout max-w-[1350px]">
+      <section className="section-padding bg-alternate border-t border-[var(--border)]">
+        <div className="container-max common-layout">
           <LibraryContent initialItems={data} />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            basePath="/watchlogs"
-          />
+          <div className="mt-12">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              basePath="/watchlogs"
+            />
+          </div>
         </div>
-      </div>
-      <div className="py-20">
-        <CTA />
-      </div>
-    </div>
+      </section>
+      <CTA />
+    </>
   );
 };
 

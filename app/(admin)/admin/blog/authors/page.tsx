@@ -12,7 +12,7 @@ export default async function BlogAuthorsPage() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">
+          <h1 className="text-4xl font-bold  text-[var(--color-primary)]">
             Blog Authors
           </h1>
           <p className="text-[var(--color-text-muted)]">

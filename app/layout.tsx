@@ -9,14 +9,14 @@ import {
   LOCALE,
 } from "@/lib/site";
 import type { Metadata, Viewport } from "next";
-import { Syne } from "next/font/google";
+import { Inter } from "next/font/google";
 import React from "react";
 import "./globals.css";
 
-const syne = Syne({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-syne",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const viewport: Viewport = {
@@ -104,22 +104,13 @@ export default function RootLayout({
     },
   };
 
-  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
-
   return (
-    <html lang="en" className={`${syne.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        {turnstileSiteKey && (
-          <script
-            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-            async
-            defer
-          />
-        )}
       </head>
       <body
         className={`antialiased relative font-body text-[var(--color-text-main)] background-gradient transition-colors duration-300`}
@@ -136,15 +127,6 @@ export default function RootLayout({
           </Suspense>
           {children}
         </ThemeProvider>
-        {turnstileSiteKey && (
-          <div
-            className="cf-turnstile"
-            data-sitekey={turnstileSiteKey}
-            data-theme="light"
-            data-size="normal"
-            data-callback="onSuccess"
-          />
-        )}
       </body>
     </html>
   );

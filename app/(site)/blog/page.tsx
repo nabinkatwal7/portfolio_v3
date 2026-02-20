@@ -1,58 +1,77 @@
-import { BlogListing } from "@/components/blog/BlogListing";
-import { ClientMotionDiv } from "@/components/common/animation/ClientMotionDiv";
-import { TextReveal } from "@/components/common/animation/TextReveal";
-import CTA from "@/components/home/CTA";
-import { getBlogPostsPaginated } from "@/app/actions/common";
-import { slideUp, staggerContainer } from "@/utils/motion-variants";
-import { Pagination } from "@/components/common/Pagination";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { getBlogPosts } from "@/app/actions/blog";
 
-export const dynamic = 'force-dynamic';
-
-const Page = async ({ searchParams }: { searchParams: Promise<{ page?: string }> }) => {
-  const params = await searchParams;
-  const currentPage = parseInt(params.page || '1', 10);
-  const { data: posts, totalPages } = await getBlogPostsPaginated(currentPage, 12);
-
-  return (
-    <div className="flex flex-col relative min-h-screen pt-24">
-      <div className="relative common-layout max-w-[1350px] py-24 px-6 overflow-hidden">
-        <ClientMotionDiv
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
-          className="relative text-center max-w-4xl mx-auto space-y-8"
-        >
-          <ClientMotionDiv variants={slideUp}>
-            <p className="text-label opacity-50 uppercase tracking-[0.4em]">Insights & Stories</p>
-          </ClientMotionDiv>
-
-          <TextReveal
-            text="The Engineering & Design Blog"
-            className="heading-section text-5xl md:text-7xl"
-          />
-
-          <ClientMotionDiv variants={slideUp}>
-            <p className="text-body text-xl md:text-2xl text-[var(--color-text-main)]/70 max-w-2xl mx-auto leading-relaxed">
-              Thoughts on development, design, and the occasional deep dive into tech.
-            </p>
-          </ClientMotionDiv>
-        </ClientMotionDiv>
-      </div>
-
-      <div className="bg-alternate py-24 border-t border-[var(--color-primary)]/10">
-        <div className="common-layout max-w-[1350px]">
-          <BlogListing posts={posts} />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            basePath="/blog"
-          />
-        </div>
-      </div>
-
-      <CTA />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Read my latest posts about software development, GoLang, web development, and more.",
+  openGraph: {
+    title: "Blog | Nabin Katwal",
+    description: "Read my latest posts about software development, GoLang, web development, and more.",
+  },
 };
 
-export default Page;
+export default async function Blog() {
+  const posts = await getBlogPosts(true);
+
+  return (
+    <div className="container-content">
+      <h1 className="text-4xl sm:text-5xl font-normal mb-8 sm:mb-12 text-neutral-900">
+        Blog
+      </h1>
+      {posts.length === 0 ? (
+        <p className="text-sm sm:text-base text-neutral-500">No posts yet.</p>
+      ) : (
+        <ul className="space-y-8">
+          {posts.map((post, index) => {
+            const accentColors = [
+              'text-primary-600 hover:text-primary-700',
+              'text-accent-purple hover:text-accent-pink',
+              'text-accent-cyan hover:text-accent-blue',
+              'text-accent-green hover:text-accent-cyan',
+              'text-accent-pink hover:text-accent-purple',
+            ]
+            const accentColor = accentColors[index % accentColors.length]
+            
+            return (
+              <li key={post.id} className="border-b border-neutral-200 pb-8 last:border-b-0 last:pb-0">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                  <Link 
+                    href={`/blog/${post.slug}`} 
+                    className={`text-xl sm:text-2xl font-medium ${accentColor} transition-colors duration-200`}
+                  >
+                    {post.title}
+                  </Link>
+                  <time className="text-sm text-neutral-500 whitespace-nowrap">
+                    {new Date(post.created_at).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+                </div>
+                {post.excerpt && (
+                  <p className="text-sm sm:text-base text-neutral-600 mt-2 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                )}
+                {post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {post.tags.map((tag) => (
+                      <span 
+                        key={tag}
+                        className="text-xs px-2 py-1 bg-neutral-100 text-neutral-600 rounded"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}

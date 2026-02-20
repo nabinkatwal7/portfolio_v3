@@ -1,146 +1,64 @@
-import { createClient } from "@/utils/supabase/server";
-import { getBlogPosts, getGuestbookEntries, getWatchlogs, getProjects } from "@/app/actions/common";
-import { DashboardStats } from "./components/DashboardStats";
-import { RecentActivity } from "./components/RecentActivity";
-import { QuickActions } from "./components/QuickActions";
-import { RecentBlogPosts } from "./components/RecentBlogPosts";
-import { RecentGuestbook } from "./components/RecentGuestbook";
+import { getBlogPosts } from '@/app/actions/blog'
+import Link from 'next/link'
 
-export const dynamic = 'force-dynamic';
+export default async function AdminDashboard() {
+  const posts = await getBlogPosts(false)
 
-async function getStats() {
-  const supabase = await createClient();
-
-  const getCount = async (table: string) => {
-    try {
-      const { count } = await supabase.from(table).select('*', { count: 'exact', head: true });
-      return count || 0;
-    } catch {
-      return 0;
-    }
-  };
-
-  const [blogPosts, categories, authors, projects, watchlogs, guestbook] = await Promise.all([
-    getCount('blog_posts'),
-    getCount('blog_categories'),
-    getCount('blog_authors'),
-    getCount('projects'),
-    getCount('watchlogs'),
-    getCount('guestbook'),
-  ]);
-
-  return {
-    blogPosts,
-    categories,
-    authors,
-    projects,
-    watchlogs,
-    guestbook,
-  };
-}
-
-async function getRecentActivity() {
-  let posts: any[] = [];
-  let guestbook: any[] = [];
-  let watchlogs: any[] = [];
-  let projects: any[] = [];
-
-  try {
-    [posts, guestbook, watchlogs, projects] = await Promise.all([
-      getBlogPosts(),
-      getGuestbookEntries(),
-      getWatchlogs(),
-      getProjects(),
-    ]);
-  } catch (error) {
-    console.error('Error fetching activity data:', error);
-  }
-
-  const activities = [
-    ...posts.slice(0, 3).map(post => ({
-      id: post.id,
-      type: 'blog' as const,
-      title: post.title,
-      timestamp: post.publishedAt || new Date().toISOString(),
-      href: `/admin/blog/${post.id}`,
-    })),
-    ...guestbook.slice(0, 2).map((entry: any) => ({
-      id: entry.id,
-      type: 'guestbook' as const,
-      title: `${entry.name}: ${entry.message.substring(0, 50)}...`,
-      timestamp: entry.created_at,
-      href: '/admin/guestbook',
-    })),
-    ...watchlogs.slice(0, 2).map((log: any) => ({
-      id: log.id,
-      type: 'watchlog' as const,
-      title: log.title,
-      timestamp: log.created_at,
-      href: '/admin/watchlogs',
-    })),
-    ...projects.slice(0, 1).map((project: any) => ({
-      id: project.id,
-      type: 'project' as const,
-      title: project.title,
-      timestamp: project.created_at,
-      href: '/admin/projects',
-    })),
-  ];
-
-  // Sort by timestamp descending
-  return activities.sort((a, b) =>
-    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  ).slice(0, 8);
-}
-
-export default async function AdminOverview() {
-  let recentPosts: any[] = [];
-  let recentGuestbook: any[] = [];
-
-  try {
-    const [posts, entries] = await Promise.all([
-      getBlogPosts(),
-      getGuestbookEntries(),
-    ]);
-    recentPosts = posts.slice(0, 5);
-    recentGuestbook = entries.slice(0, 5);
-  } catch (error) {
-    console.error('Error fetching dashboard data:', error);
-  }
-
-  const [stats, activities] = await Promise.all([
-    getStats(),
-    getRecentActivity(),
-  ]);
+  const publishedCount = posts.filter(p => p.published).length
+  const draftCount = posts.filter(p => !p.published).length
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-bold font-[var(--font-syne)] text-[var(--color-primary)]">
-          Dashboard
-        </h1>
-        <p className="text-[var(--color-text-muted)]">
-          Overview of your portfolio content and statistics
-        </p>
+    <div className="container-main">
+      <h1 className="text-3xl sm:text-4xl font-normal mb-8 text-neutral-900">Admin Dashboard</h1>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+        <div className="border border-neutral-200 bg-white p-6 rounded-lg shadow-sm">
+          <p className="text-sm text-neutral-600 mb-2">Total Posts</p>
+          <p className="text-3xl font-medium text-neutral-900">{posts.length}</p>
+        </div>
+        <div className="border border-neutral-200 bg-white p-6 rounded-lg shadow-sm">
+          <p className="text-sm text-neutral-600 mb-2">Published</p>
+          <p className="text-3xl font-medium text-success">{publishedCount}</p>
+        </div>
+        <div className="border border-neutral-200 bg-white p-6 rounded-lg shadow-sm">
+          <p className="text-sm text-neutral-600 mb-2">Drafts</p>
+          <p className="text-3xl font-medium text-warning">{draftCount}</p>
+        </div>
       </div>
 
-      {/* Statistics Cards */}
-      <DashboardStats stats={stats} />
-
-      {/* Quick Actions */}
-      <QuickActions />
-
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Blog Posts */}
-        <RecentBlogPosts posts={recentPosts} />
-
-        {/* Recent Guestbook */}
-        <RecentGuestbook entries={recentGuestbook} />
+      <div className="mb-8">
+        <Link
+          href="/admin/posts/new"
+          className="inline-block px-6 py-3 bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-200 rounded-lg font-medium shadow-sm"
+        >
+          Create New Post
+        </Link>
       </div>
 
-      {/* Recent Activity */}
-      <RecentActivity activities={activities} />
+      <div>
+        <h2 className="text-xl sm:text-2xl font-normal mb-6 text-neutral-900">Recent Posts</h2>
+        <ul className="space-y-4">
+          {posts.slice(0, 5).map((post) => (
+            <li key={post.id} className="border-b border-neutral-200 pb-4 last:border-b-0">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <Link
+                  href={`/admin/posts/${post.id}`}
+                  className="text-primary-600 hover:text-primary-700 transition-colors duration-200 font-medium"
+                >
+                  {post.title}
+                </Link>
+                <span className={`text-sm px-2 py-1 rounded ${
+                  post.published 
+                    ? 'bg-success/10 text-success' 
+                    : 'bg-warning/10 text-warning'
+                }`}>
+                  {post.published ? 'Published' : 'Draft'}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-  );
+  )
 }

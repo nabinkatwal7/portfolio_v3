@@ -3,31 +3,30 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export async function login(formData: FormData) {
-  const password = formData.get('password') as string
-  const adminPassword = process.env.ADMIN_PASSWORD
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || ''
 
-  if (password === adminPassword) {
+export async function login(password: string) {
+  if (password === ADMIN_PASSWORD) {
     const cookieStore = await cookies()
-    cookieStore.set('admin_session', 'true', {
+    cookieStore.set('admin-authenticated', 'true', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 7, // 1 week
-      path: '/',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
     })
     return { success: true }
   }
-
-  return { error: 'Invalid password' }
+  return { success: false, error: 'Invalid password' }
 }
 
 export async function logout() {
   const cookieStore = await cookies()
-  cookieStore.delete('admin_session')
-  redirect('/admin')
+  cookieStore.delete('admin-authenticated')
+  redirect('/admin/login')
 }
 
-export async function checkAuth() {
+export async function isAuthenticated() {
   const cookieStore = await cookies()
-  return cookieStore.has('admin_session')
+  const authCookie = cookieStore.get('admin-authenticated')
+  return authCookie?.value === 'true'
 }

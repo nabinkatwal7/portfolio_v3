@@ -1,113 +1,153 @@
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --font-Logo: "Great Vibes";
-  --font-body: var(--font-syne);
-
-  --color-background: var(--background);
-  --color-background-alt: var(--background-alt);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-
-  /* Typography System Tokens */
-  --tracking-tighter: -0.05em;
-  --tracking-tight: -0.015em;
-
-  --font-weight-display: 800;
-  --font-weight-heading: 700;
-  --font-weight-body: 400;
-  --font-weight-medium: 500;
-
-  /* Animations */
-  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
-
-  /* Semantic mappings for easier refactoring */
-  --color-text-main: var(--foreground);
-  --color-text-muted: var(--muted-foreground);
-  --color-bg-light: var(--muted);
-  --color-bg-lightest: var(--background);
-  --color-accent-light: var(--muted);
-}
-
-@keyframes cell-ripple {
-   0% { opacity: 0.1; }
-   50% { opacity: 0.5; }
-   100% { opacity: 0.1; }
-}
-
-:root {
-  --background: #ffffff;
-  --background-alt: #f8fafc;
-  --foreground: #0f172a; /* Slate 900 */
-  --primary: #7c3aed; /* Violet 600 - darker for light mode contrast */
-  --primary-foreground: #ffffff;
-  --muted: #f1f5f9; /* Slate 100 */
-  --muted-foreground: #475569; /* Slate 600 */
-}
-
-.dark {
-  --background: #020617; /* Slate 950 */
-  --background-alt: #0f172a; /* Slate 900 */
-  --foreground: #f8fafc; /* Slate 50 */
-  --primary: #a78bfa; /* Violet 400 */
-  --primary-foreground: #020617;
-  --muted: #1e293b; /* Slate 800 */
-  --muted-foreground: #94a3b8; /* Slate 400 */
-}
-
-.background-gradient {
-  background-color: var(--background);
-}
-
-.common-layout {
-  @apply mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-4 sm:py-6 md:py-8 lg:py-12 xl:py-16 2xl:py-20;
-}
-
-html {
-  scrollbar-width: none;
-  scroll-behavior: smooth;
-} /* Firefox */
-body {
-  -ms-overflow-style: none;
-} /* IE and Edge */
-/* Typography Utility Classes */
-@layer utilities {
-  .heading-display {
-    @apply text-4xl sm:text-6xl font-[var(--font-weight-display)] tracking-tighter text-[var(--color-text-main)] leading-[1.05] text-pretty;
+@layer base {
+  :root {
+    --color-primary: 99 102 241;
+    --color-accent-cyan: 6 182 212;
+    --color-accent-purple: 168 85 247;
+    --color-accent-pink: 236 72 153;
+    --color-accent-orange: 249 115 22;
+    --color-accent-green: 16 185 129;
+    --color-accent-blue: 59 130 246;
   }
 
-  .heading-section {
-    @apply text-3xl sm:text-4xl font-[var(--font-weight-heading)] tracking-tight text-[var(--color-text-main)] leading-tight text-pretty;
+  html,
+  body {
+    @apply max-w-full overflow-x-hidden bg-neutral-50 text-neutral-900;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  .heading-card {
-    @apply text-xl font-[var(--font-weight-heading)] text-[var(--color-text-main)] leading-snug;
+  a {
+    @apply text-inherit no-underline transition-colors duration-200;
   }
 
-  .text-body {
-    @apply text-base sm:text-lg font-[var(--font-weight-body)] text-[var(--color-text-muted)] leading-relaxed;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-normal;
   }
 
-  .bg-alternate {
-    background-color: var(--background-alt);
+  h1 {
+    @apply text-neutral-900;
   }
 
-  .text-label {
-    @apply text-xs font-[var(--font-weight-medium)] uppercase tracking-widest text-[var(--color-primary)];
+  h2 {
+    @apply text-neutral-800;
   }
 
-  .text-small {
-    @apply text-sm text-[var(--color-text-muted)] leading-normal;
+  p {
+    @apply text-neutral-700;
   }
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-accent-purple to-accent-pink;
+  }
 
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  .link-accent {
+    @apply text-primary-600 hover:text-primary-700 transition-colors duration-200;
+  }
+
+  .link-accent-cyan {
+    @apply text-accent-cyan hover:text-accent-blue transition-colors duration-200;
+  }
+
+  .link-accent-purple {
+    @apply text-accent-purple hover:text-primary-600 transition-colors duration-200;
+  }
+
+  .link-accent-pink {
+    @apply text-accent-pink hover:text-accent-purple transition-colors duration-200;
+  }
+
+  .container-main {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-content {
+    @apply max-w-2xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* TipTap Editor Styles */
+  .ProseMirror {
+    outline: none;
+  }
+
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #9ca3af;
+    pointer-events: none;
+    height: 0;
+  }
+
+  .ProseMirror h1 {
+    @apply text-3xl font-bold mb-4 mt-6;
+  }
+
+  .ProseMirror h2 {
+    @apply text-2xl font-bold mb-3 mt-5;
+  }
+
+  .ProseMirror h3 {
+    @apply text-xl font-bold mb-2 mt-4;
+  }
+
+  .ProseMirror p {
+    @apply mb-4;
+  }
+
+  .ProseMirror ul,
+  .ProseMirror ol {
+    @apply mb-4 pl-6;
+  }
+
+  .ProseMirror ul {
+    @apply list-disc;
+  }
+
+  .ProseMirror ol {
+    @apply list-decimal;
+  }
+
+  .ProseMirror li {
+    @apply mb-2;
+  }
+
+  .ProseMirror blockquote {
+    @apply border-l-4 border-neutral-300 pl-4 italic my-4 text-neutral-600;
+  }
+
+  .ProseMirror code {
+    @apply bg-neutral-100 px-1 py-0.5 rounded text-sm font-mono;
+  }
+
+  .ProseMirror pre {
+    @apply bg-neutral-100 p-4 rounded-lg overflow-x-auto my-4;
+  }
+
+  .ProseMirror pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .ProseMirror hr {
+    @apply my-8 border-t border-neutral-200;
+  }
+
+  .ProseMirror strong {
+    @apply font-semibold;
+  }
+
+  .ProseMirror em {
+    @apply italic;
+  }
+
+  .ProseMirror a {
+    @apply text-primary-600 hover:text-primary-700 underline;
+  }
 }
